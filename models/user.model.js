@@ -28,7 +28,10 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   breed: String,
-  sex: String,
+  sex: {
+    type: String,
+    required: true
+  },
   pictures: [{
     url: String,
     isProfilePic: Boolean,
