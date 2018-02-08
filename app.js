@@ -4,10 +4,11 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const expressLayout = require('express-ejs-layouts');
 
 const index = require('./routes/index.routes');
-const users = require('./routes/users.routes');
-const profile = require('./routes/profile.routes');
+// const users = require('./routes/users.routes');
+// const profile = require('./routes/profile.routes');
 
 const app = express();
 
@@ -15,8 +16,10 @@ const app = express();
 require('./config/config.db.js');
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(expressLayout);
+app.set('layout', 'layout');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -27,8 +30,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
-app.use('/profile', profile);
+// app.use('/users', users);
+// app.use('/profile', profile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -45,7 +48,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error.views');
 });
 
 module.exports = app;
