@@ -1,11 +1,20 @@
 
+<!-- Card with login and signup buttons -->
+<div class="card-deck-wrapper">
+  <div class="card-deck">
+    <div class="card col-sm-4 p-5 mx-auto mt-5">
+      <img class="card-img-top start-logo" src="images/dog-log-typo.svg" alt="Petify-logo">
+      <div class="card-block">
+          <!-- Trigger the modal SIGNUP with a button -->
+          <button type="button" class="btn btn-dark btn-lg start-btn" data-toggle="modal" data-target="#register">Register your pet</button>
+          <!-- Trigger the modal LOGIN with a button -->
+          <button type="button" class="btn btn-dark btn-lg start-btn" data-toggle="modal" data-target="#login">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-
-<!-- Trigger the modal SIGNUP with a button -->
-<button type="button" class="btn btn-dark btn-lg" data-toggle="modal" data-target="#register">Register your pet</button>
-
-<!-- Trigger the modal LOGIN with a button -->
-<button type="button" class="btn btn-dark btn-lg" data-toggle="modal" data-target="#login">Login</button>
 
 <!-- Open the modal SIGNUP-->
 <div id="register" class="modal fade" role="dialog">
@@ -15,7 +24,7 @@
         <h3 class="text-center">Register your pet</h3>
       </div>
       <div class="modal-body">
-        <form action="/auth/login" method="post">
+        <form action="/auth/signup" method="post">
           <div class="form-group">
             <label for="name">Petname</label>
             <input name="petname" type="text" class="form-control" value="" required>
@@ -112,7 +121,7 @@
         <h3 class="text-center">Login</h3>
       </div>
       <div class="modal-body">
-        <form action="/home" method="post">
+        <form action="/auth/login" method="post">
           <div class="form-group">
             <div class="form-group">
               <label for="email">Email</label>
