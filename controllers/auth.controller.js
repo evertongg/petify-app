@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const SALT_FACTOR = 10;
 require('mongoose');
 
 
@@ -47,7 +48,7 @@ module.exports.doSignup = (req, res, next) => {
       location: req.body.location
     });
 
-    } else {
+  } else {
 
     //Check if user is already in DB
     User.findOne({
@@ -55,35 +56,23 @@ module.exports.doSignup = (req, res, next) => {
       })
       .then(user => {
         if (!user) {
-          const newUser = new User({
-            petname,
-            ownername,
-            email,
-            password,
-            location,
-            animaltype,
-            sex
+          user = new User({
+            petname: req.body.petname,
+            ownername: req.body.ownername,
+            email: req.body.email,
+            password: req.body.password,
+            location: req.body.location,
+            animaltype: req.body.animaltype,
+            sex: req.body.sex
           });
-
-          // Encrypting pw and saving in database
-          bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-              if (err) {
-                throw err;
-              };
-              newUser.password = hash;
-              newUser.save()
-                .then(user => {
-                  res.redirect('/user/login');
-                })
-                .catch((err) => {
-                  console.log(err);
-                  return;
-                });
-            });
+          user.save()
+          .then(() => {
+            res.redirect('/user');
+          }).catch((err) => {
+            console.log(err);
           });
         } else {
-          res.redirect('/user/register');
+          res.redirect('/');
         }
       })
       .catch((err) => {
