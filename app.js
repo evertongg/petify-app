@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const expressLayout = require('express-ejs-layouts');
 
 const index = require('./routes/index.routes');
+const auth = require('./routes/auth.routes');
 // const users = require('./routes/users.routes');
 // const profile = require('./routes/profile.routes');
 
@@ -21,6 +22,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayout);
 app.set('layout', 'layout');
 
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -30,6 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/auth', auth);
 // app.use('/users', users);
 // app.use('/profile', profile);
 
