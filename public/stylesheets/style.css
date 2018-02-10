@@ -13,3 +13,18 @@
   margin: 30px auto;
   text-align: center;
 }
+
+.red-box {
+  outline: none;
+  border-color: #FFFF;
+  box-shadow: 0 0 10px #ff0000;
+}
+
+.modal-block {
+  display:block;
+  overflow-y: auto;
+}
+
+.opacity {
+  opacity: 0.5 !important;
+}
