@@ -90,10 +90,16 @@ module.exports.doSignup = (req, res, next) => {
 
 // DO LOGIN
 module.exports.doLogin = (req, res, next) => {
-
 passport.authenticate('local', {
   successRedirect: '/user',
   failureRedirect: '/',
   failureFlash: true
 })(req, res, next);
+};
+
+// DO Logout
+module.exports.doLogout = (req,res, next) => {
+  req.logout();
+  req.flash('success_msg', 'Successfully logged out');
+  res.redirect('/');
 };
