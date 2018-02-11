@@ -66,8 +66,8 @@ module.exports.doSignup = (req, res, next) => {
           });
           user.save()
           .then(() => {
-            req.flash('success_msg', 'Welcome, you are successfully registered!');
-            res.redirect('/user');
+            req.flash('success_msg', 'Welcome, you are successfully registered! You are now able to log in');
+            res.redirect('/');
           }).catch((err) => {
             console.log(err);
           });
@@ -100,6 +100,6 @@ passport.authenticate('local', {
 // DO Logout
 module.exports.doLogout = (req,res, next) => {
   req.logout();
-  req.flash('success_msg', 'Successfully logged out');
+  req.flash('success_msg', 'Successfully logged out. Hope to see you soon!');
   res.redirect('/');
 };

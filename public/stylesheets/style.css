@@ -28,3 +28,19 @@
 .opacity {
   opacity: 0.5 !important;
 }
+
+.l-height {
+    line-height:2px !important;
+}
+
+.silver {
+  background-color: #F5F5F5;
+}
+
+.dodger {
+  background-color: #1098F7;
+}
+
+.black {
+  background-color: #000000;
+}
