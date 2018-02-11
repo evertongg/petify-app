@@ -66,8 +66,8 @@ module.exports.doSignup = (req, res, next) => {
           });
           user.save()
           .then(() => {
-            req.flash('success_msg', 'Welcome, you are successfully registered!');
-            res.redirect('/user');
+            req.flash('success_msg', 'Welcome, you are successfully registered! You are now able to log in');
+            res.redirect('/');
           }).catch((err) => {
             console.log(err);
           });
