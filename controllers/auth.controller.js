@@ -1,8 +1,7 @@
 const User = require('../models/user.model');
-const bcrypt = require('bcrypt');
 const passport = require('passport');
-const SALT_FACTOR = 10;
 require('mongoose');
+require('../config/config.passport')(passport);
 
 
 // GET HOME page with login and signup modals.
@@ -15,7 +14,6 @@ module.exports.show = (req, res) => {
     email: req.body.email,
     location: req.body.location
   });
-  console.log(errors);
 };
 
 // DO SIGN UP and save user in the DB
@@ -88,4 +86,14 @@ module.exports.doSignup = (req, res, next) => {
         console.log(err);
       });
   }
+};
+
+// DO LOGIN
+module.exports.doLogin = (req, res, next) => {
+
+passport.authenticate('local', {
+  successRedirect: '/user',
+  failureRedirect: '/',
+  failureFlash: true
+})(req, res, next);
 };
