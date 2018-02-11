@@ -7,6 +7,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressLayout = require('express-ejs-layouts');
+const passport = require('passport');
 
 const auth = require('./routes/auth.routes');
 const profile = require('./routes/profile.routes');
