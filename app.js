@@ -2,11 +2,14 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const flash = require('connect-flash');
+const mongoose = require('mongoose');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressLayout = require('express-ejs-layouts');
+const passport = require('passport');
 
 const auth = require('./routes/auth.routes');
 const profile = require('./routes/profile.routes');
@@ -17,7 +20,8 @@ const app = express();
 // Require DATABASE
 require('./config/config.db.js');
 
-// PASSPORT MIDDLEWARE HERE
+// Require PASSPORT
+require('./config/config.passport')(passport);
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -38,7 +42,20 @@ app.use(session({
   secret: 'keyboard cat',
   resave: true,
   saveUninitialized: true,
+  cookie: {
+    secure: false,
+    httpOnly: true,
+    maxAge: 60 * 60 * 24 * 1000
+  },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60
+  })
 }));
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(flash());
 
