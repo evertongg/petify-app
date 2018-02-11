@@ -1,17 +1,53 @@
-<div class="container mt-4">
-  <div class="row">
+<div class="container mt-4" >
+  <div class="row" style="min-height: 750px">
     <div class="col">
-pictures
-    </div>
-    <div class="col-6">
       <div class="row">
+        <img src="images/placeholder.jpg" alt="profile picture" class="rounded-circle">
+      </div>
+      <br>
+      <div class="row mx-4 mt-4">
+          <div class="col"><img src="images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
+          <div class="col"><img src="images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
+          <div class="w-100"></div>
+          <div class="col"><img src="images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
+          <div class="col"><img src="images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
+      </div>
+    </div>
+    <div class="col-6 silver">
+      <div class="row ml-2 mt-2">
         <h1 class="display-4">
           Welcome, <%= user.petname %>!
         </h1>
       </div>
+      <hr/>
+      <div class="container">
+        <h2>My owner: <%= user.ownername %></h2>
+          <p class="l-height"><strong>About me: </strong> <%= user.bio %> </p>
+          <p class="l-height"><strong>I live in : </strong> <%= user.location %> </p>
+          <p class="l-height"><strong>I am a: </strong> <%= user.animaltype %> </p>
+          <p class="l-height"><strong>My breed: </strong> <%= user.breed %> </p>
+          <img src="<% switch(user.sex) {
+            case 'male': %>
+              images/male.png
+              <% break;
+
+            case 'female': %>
+              images/female.png
+              <% break;
+
+            case 'hermaphrodite': %>
+              images/herma.png
+              <% break;
+          } %>" alt="sex: <%= user.sex %>">
+
+      </div>
     </div>
-    <div class="col">
-followers
+    <div class="col border ml-2">
+      <div class="h-100">
+        <div class="row m-3">
+          <h3 class="display-6">Following</h3>
+        </div>
+      </div>
     </div>
   </div>
 </div>
