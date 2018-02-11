@@ -1,0 +1,30 @@
+* {
+  font-family: 'Nunito', sans-serif;
+}
+
+.start-logo {
+  width: 150px;
+  margin: 0 auto;
+}
+
+.start-btn {
+  width: 280px;
+  display: block;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.red-box {
+  outline: none;
+  border-color: #FFFF;
+  box-shadow: 0 0 10px #ff0000;
+}
+
+.modal-block {
+  display:block;
+  overflow-y: auto;
+}
+
+.opacity {
+  opacity: 0.5 !important;
+}
