@@ -18,6 +18,7 @@ module.exports.show = (req, res) => {
   console.log(errors);
 };
 
+// DO SIGN UP and save user in the DB
 module.exports.doSignup = (req, res, next) => {
   let errors = [];
 
@@ -37,7 +38,7 @@ module.exports.doSignup = (req, res, next) => {
     errors.push({text: 'Location is required'});
   }
   if (req.body.password !== req.body.password2) {
-      errors.push({text: 'Passwords do not match'});
+    errors.push({text: 'Passwords do not match'});
   }
   if (errors.length > 0) {
     res.render('index', {
@@ -67,12 +68,20 @@ module.exports.doSignup = (req, res, next) => {
           });
           user.save()
           .then(() => {
+            req.flash('success_msg', 'Successfully logged in!');
             res.redirect('/user');
           }).catch((err) => {
             console.log(err);
           });
         } else {
-          res.redirect('/');
+          errors.push({text: 'User already registered! Please pick another email'});
+          res.render('index', {
+            errors: errors,
+            petname: req.body.petname,
+            ownername: req.body.ownername,
+            email: req.body.email,
+            location: req.body.location
+          });
         }
       })
       .catch((err) => {
