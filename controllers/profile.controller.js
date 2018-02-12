@@ -4,6 +4,7 @@ module.exports.show = (req, res, next) => {
   const id = req.params.id;
   User.findById(id)
   .then((foundUser) => {
+    console.log(foundUser);
     res.render('profile/profile', {
       foundUser: foundUser
     });
