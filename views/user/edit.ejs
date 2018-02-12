@@ -1,0 +1,144 @@
+<div class="container mt-4" >
+  <div class="row" style="min-height: 750px">
+    <div class="col-4">
+      <div class="row mx-auto prof-container">
+        <img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle">
+      </div>
+      <br>
+      <div class="row mx-4 mt-4">
+          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
+          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
+          <div class="w-100"></div>
+          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
+          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
+      </div>
+    </div>
+    <div class="col-8 silver rounded">
+      <div class="row ml-2 mt-2">
+        <h1 class="display-4">
+          Edit profile
+        </h1>
+      </div>
+      <hr/>
+      <div class="container">
+        <form action="/register" method="post">
+          <div class="form-group">
+            <label for="exampleFormControlFile1">Add picture</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+          </div>
+          <div class="form-group">
+            <label for="name">Petname</label>
+            <input name="petname" type="text" class="form-control" value="<%= user.petname %>" >
+          </div>
+          <div class="form-group">
+            <div class="form-group">
+              <label for="name">Ownername</label>
+              <input name="ownername" type="text" class="form-control" value="<%= user.ownername %>" >
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">About me</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="name">Location</label>
+              <input name="location" type="text" class="form-control" value="<%= user.location %>">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Animal Type</label>
+              <select class="form-control" id="exampleFormControlSelect1" name="animaltype">
+               <option>Dog</option>
+               <option>Cat</option>
+               <option>Bird</option>
+               <option>Rabbit</option>
+               <option>Rat</option>
+               <option>Hamster</option>
+               <option>Reptile</option>
+               <option>Fish</option>
+               <option>Guinea Pig</option>
+               <option>Ferret</option>
+               <option>Chincilla</option>
+               <option>Insects</option>
+               <option>Amphibians</option>
+               <option>Horse</option>
+               <option>Goat</option>
+               <option>Donkey</option>
+               <option>Ducks</option>
+               <option>Chicken</option>
+               <option>Mouse</option>
+               <option>Turtle</option>
+               <option>Other exotics</option>
+             </select>
+            </div>
+            <div class="form-group">
+              <label for="name">Breed/Species</label>
+              <input name="breed" type="text" class="form-control" value="<%= user.breed %>">
+            </div>
+            <div class="form-group row">
+                <label for="example-date-input" class="col-2 col-form-label">Birthdate</label>
+                <div class="col-10">
+              <input class="form-control" name="birthdate" type="date" value="" id="example-date-input">
+            </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelect2">Activities</label>
+                <select multiple class="form-control" id="exampleSelect2" name="skills">
+                  <option>Catching mice</option>
+                  <option>Catch frisbees</option>
+                  <option>Walk in the park</option>
+                  <option>Eating</option>
+                  <option>Swimming</option>
+                  <option>Watching tv</option>
+                  <option>Bullying dogs</option>
+                  <option>Tickling my boss</option>
+                  <option>Playing with a ball</option>
+                  <option>Scratching furniture</option>
+                </select>
+              </div>
+
+            <div class="form-group">
+                <label for="exampleSelect2">Character</label>
+                <select multiple class="form-control" id="exampleSelect2" name="character">
+                  <option>Sociable</option>
+                  <option>High-energy</option>
+                  <option>Lazy</option>
+                  <option>Friendly</option>
+                  <option>Playful</option>
+                  <option>Independant</option>
+                  <option>Aggressive</option>
+                  <option>Arrogant</option>
+                  <option>Sweet</option>
+                  <option>Funny</option>
+                </select>
+              </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Animal sex</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sex" id="exampleRadios1" value="male" >
+                <label class="form-check-label" for="exampleRadios1">
+                  Male
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sex" id="exampleRadios2" value="female" >
+                <label class="form-check-label" for="exampleRadios2">
+                  Female
+                </label>
+              </div>
+              <div class="form-check disabled">
+                <input class="form-check-input" type="radio" name="sex" id="exampleRadios3" value="hermaphrodite" >
+                <label class="form-check-label" for="exampleRadios3">
+                  Hermaphrodite
+                </label>
+              </div>
+            </div>
+              <br>
+              <div class="form-group">
+                <div class="form-group">
+                  <button type="submit" class="btn btn-dark">Save changes</button>
+              </form>
+      </div>
+      <hr/>
+    </div>
+  </div>
+</div>

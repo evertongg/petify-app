@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
     uploaded: Date
     }],
   birthdate: Date,
-  character: String,
+  character: [String],
   bio: String,
   skills: [String],
   followers: [{
