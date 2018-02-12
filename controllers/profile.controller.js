@@ -1,6 +1,14 @@
 const User = require('../models/user.model');
 
 module.exports.show = (req, res, next) => {
-  console.log(req.params.id);
-  res.render('user');
+  const id = req.params.id;
+  User.findById(id)
+  .then((foundUser) => {
+    res.render('profile/profile', {
+      foundUser: foundUser
+    });
+  })
+  .catch(err => {
+    console.log(err);
+  });
 };
