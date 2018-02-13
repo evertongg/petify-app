@@ -16,29 +16,17 @@
     <div class="col-6 silver">
       <div class="row ml-2 mt-2">
         <h1 class="display-4">
-          <%= foundUser.petname %>
+          <%= user.petname %>
         </h1>
       </div>
       <hr/>
       <div class="container">
-        <h2>My owner: <%= foundUser.ownername %></h2>
-          <p class="l-height"><strong>About me: </strong> <%= foundUser.bio %> </p>
-          <p class="l-height"><strong>I live in : </strong> <%= foundUser.location %> </p>
-          <p class="l-height"><strong>I am a: </strong> <%= foundUser.animaltype %> </p>
-          <p class="l-height"><strong>My breed: </strong> <%= foundUser.breed %> </p>
-          <img src="<% switch(user.sex) {
-            case 'male': %>
-              /images/male.png
-              <% break;
-
-            case 'female': %>
-              /images/female.png
-              <% break;
-
-            case 'hermaphrodite': %>
-              /images/herma.png
-              <% break;
-          } %>" alt="sex: <%= user.sex %>">
+        <h2>My owner: <%= user.ownername %></h2>
+          <p class="l-height"><strong>About me: </strong> <%= user.bio %> </p>
+          <p class="l-height"><strong>I live in : </strong> <%= user.location %> </p>
+          <p class="l-height"><strong>I am a: </strong> <%= user.animaltype %> </p>
+          <p class="l-height"><strong>My breed: </strong> <%= user.breed %> </p>
+          <img src="<%= sex %>" alt="sex: <%= sex %>">
 
       </div>
       <hr/>

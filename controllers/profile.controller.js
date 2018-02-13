@@ -1,12 +1,15 @@
 const User = require('../models/user.model');
+const {getSex} = require('../config/getsex');
 
 module.exports.show = (req, res, next) => {
-  const id = req.params.id;
+  const {id} = req.params;
   User.findById(id)
-  .then((foundUser) => {
-    console.log(foundUser);
+  .then((user) => {
+    const sex = getSex(user.sex);
+    console.log(user);
     res.render('profile/profile', {
-      foundUser: foundUser
+      user,
+      sex
     });
   })
   .catch(err => {
