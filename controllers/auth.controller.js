@@ -99,7 +99,9 @@ passport.authenticate('local', {
 
 // DO Logout
 module.exports.doLogout = (req,res, next) => {
-  req.logout();
-  req.flash('success_msg', 'Successfully logged out. Hope to see you soon!');
-  res.redirect('/');
+  //req.logout();
+  req.session.destroy(err => {
+    //req.flash('success_msg', 'Successfully logged out. Hope to see you soon!');
+    res.redirect('/');
+  })
 };
