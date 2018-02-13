@@ -26,34 +26,24 @@
           <p class="l-height"><strong>I live in : </strong> <%= user.location %> </p>
           <p class="l-height"><strong>I am a: </strong> <%= user.animaltype %> </p>
           <p class="l-height"><strong>My breed: </strong> <%= user.breed %> </p>
-          <img src="<% switch(user.sex) {
-            case 'male': %>
-              images/male.png
-              <% break;
-
-            case 'female': %>
-              images/female.png
-              <% break;
-
-            case 'hermaphrodite': %>
-              images/herma.png
-              <% break;
-          } %>" alt="sex: <%= user.sex %>">
-
+          <img src="<%= sex %>" alt="sex: <%= sex %>">
       </div>
-      <div class="container">
-        <div class="card my-4">
-          <h5 class="card-header">Leave a Comment:</h5>
-          <div class="card-body">
-            <form>
-              <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
+
+            <div class="container">
+              <div class="card my-4">
+                <h5 class="card-header">Leave a Comment:</h5>
+                <div class="card-body">
+                  <form action="/post/<%= user.id %>" method="post">
+                    <div class="form-group">
+                      <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
-        </div>
-      </div>
+            </div>
+
+
       <hr/>
     </div>
     <div class="col border m-4 rounded">
