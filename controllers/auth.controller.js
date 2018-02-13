@@ -130,8 +130,10 @@ module.exports.doLogin = (req, res, next) => {
 };
 
 // DO Logout
+
 module.exports.doLogout = (req, res, next) => {
   req.logout();
   req.flash('success_msg', 'Successfully logged out. Hope to see you soon!');
   res.redirect('/');
+
 };
