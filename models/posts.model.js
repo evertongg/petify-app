@@ -11,7 +11,7 @@ const postSchema = new mongoose.Schema({
   },
   attachment: {
     type: String,
-    required: true
+    required: false
   },
   likes: Number,
   followers_ids: [String],
