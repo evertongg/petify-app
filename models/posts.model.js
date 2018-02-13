@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const SALT_WORK_FACTOR = 10;
 
 const postSchema = new mongoose.Schema({
   owner_id: {
@@ -19,5 +17,5 @@ const postSchema = new mongoose.Schema({
   followers_ids: [String],
 })
 
-const User = mongoose.model('Post', postSchema);
+const Post = mongoose.model('Post', postSchema);
 module.exports = Post;

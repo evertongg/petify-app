@@ -12,7 +12,7 @@ module.exports.show = (req, res) => {
     petname: req.body.petname,
     ownername: req.body.ownername,
     email: req.body.email,
-    location: req.body.location
+    location: req.body.location,
   });
 };
 
@@ -21,30 +21,48 @@ module.exports.doSignup = (req, res, next) => {
   let errors = [];
 
   if (!req.body.petname) {
-    errors.push({text: 'Petname is required'});
+    errors.push({
+      text: 'Petname is required'
+    });
   }
   if (!req.body.ownername) {
-    errors.push({text: 'Ownername is required'});
+    errors.push({
+      text: 'Ownername is required'
+    });
   }
   if (!req.body.email) {
-    errors.push({text: 'Email is required'});
+    errors.push({
+      text: 'Email is required'
+    });
   }
   if (!req.body.password) {
-    errors.push({text: 'Password is required'});
+    errors.push({
+      text: 'Password is required'
+    });
   }
   if (!req.body.location) {
-    errors.push({text: 'Location is required'});
+    errors.push({
+      text: 'Location is required'
+    });
   }
   if (req.body.password !== req.body.password2) {
-    errors.push({text: 'Passwords do not match'});
+    errors.push({
+      text: 'Passwords do not match'
+    });
   }
   if (errors.length > 0) {
+    const {
+      petname,
+      ownername,
+      email,
+      location
+    } = req.body;
     res.render('index', {
-      errors: errors,
-      petname: req.body.petname,
-      ownername: req.body.ownername,
-      email: req.body.email,
-      location: req.body.location
+      errors,
+      petname,
+      ownername,
+      email,
+      location,
     });
 
   } else {
@@ -55,24 +73,38 @@ module.exports.doSignup = (req, res, next) => {
       })
       .then(user => {
         if (!user) {
-          user = new User({
-            petname: req.body.petname,
-            ownername: req.body.ownername,
-            email: req.body.email,
-            password: req.body.password,
-            location: req.body.location,
-            animaltype: req.body.animaltype,
-            sex: req.body.sex
-          });
+          const {
+            petname,
+            ownername,
+            email,
+            password,
+            location,
+            animaltype,
+            sex
+          } = req.body;
+
+          const newUser = {
+            petname,
+            ownername,
+            email,
+            password,
+            location,
+            animaltype,
+            sex
+          };
+
+          user = new User(newUser);
           user.save()
-          .then(() => {
-            req.flash('success_msg', 'Welcome, you are successfully registered! You are now able to log in');
-            res.redirect('/');
-          }).catch((err) => {
-            console.log(err);
-          });
+            .then(() => {
+              req.flash('success_msg', 'Welcome, you are successfully registered! You are now able to log in');
+              res.redirect('/');
+            }).catch((err) => {
+              console.log(err);
+            });
         } else {
-          errors.push({text: 'User already registered! Please pick another email'});
+          errors.push({
+            text: 'User already registered! Please pick another email'
+          });
           res.render('index', {
             errors: errors,
             petname: req.body.petname,
@@ -90,15 +122,15 @@ module.exports.doSignup = (req, res, next) => {
 
 // DO LOGIN
 module.exports.doLogin = (req, res, next) => {
-passport.authenticate('local', {
-  successRedirect: '/user',
-  failureRedirect: '/',
-  failureFlash: true
-})(req, res, next);
+  passport.authenticate('local', {
+    successRedirect: '/user',
+    failureRedirect: '/',
+    failureFlash: true
+  })(req, res, next);
 };
 
 // DO Logout
-module.exports.doLogout = (req,res, next) => {
+module.exports.doLogout = (req, res, next) => {
   req.logout();
   req.flash('success_msg', 'Successfully logged out. Hope to see you soon!');
   res.redirect('/');
