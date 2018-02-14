@@ -103,7 +103,7 @@ module.exports.doSignup = (req, res, next) => {
             });
         } else {
           errors.push({
-            text: 'User already registered! Please pick another email'
+            text: 'User already registered with this email!'
           });
           res.render('index', {
             errors: errors,
