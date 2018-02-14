@@ -2,6 +2,11 @@
   font-family: 'Nunito', sans-serif;
 }
 
+.error {
+  background-image: url('/images/background.png');
+  min-height: 700px;
+}
+
 .start-logo {
   width: 150px;
   margin: 0 auto;

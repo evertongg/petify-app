@@ -82,6 +82,9 @@ app.use('/user', user);
 app.use('/profile', profile);
 app.use('/search', search);
 app.use('/post', post);
+app.get('*', function(req, res, next){
+  res.render('error');
+});
 
 
 // catch 404 and forward to error handler
