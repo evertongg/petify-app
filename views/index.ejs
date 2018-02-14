@@ -1,23 +1,25 @@
-
-<!-- Manages modal backdrop after an error occurs in the modal -->
-<div class="<%= typeof errors != 'undefined' ? 'modal-backdrop opacity' : '' %>">
-  <!-- Card with login and signup buttons -->
-<% if (!user) { %>
-  <div class="card-deck-wrapper">
-    <div class="card-deck">
-      <div class="card col-sm-4 p-5 mx-auto mt-5" style="border: none">
-        <img class="card-img-top start-logo" src="images/dog-log-typo.svg" alt="Petify-logo">
-        <div class="card-block">
-            <!-- Trigger the modal SIGNUP with a button -->
-            <button type="button" class="btn btn-dark btn-lg start-btn" data-toggle="modal" data-target="#register">Register your pet</button>
-            <!-- Trigger the modal LOGIN with a button -->
-            <button type="button" class="btn btn-dark btn-lg start-btn" data-toggle="modal" data-target="#login">Login</button>
+<div class="error">
+  <!-- Manages modal backdrop after an error occurs in the modal -->
+  <div class="<%= typeof errors != 'undefined' ? 'modal-backdrop opacity' : '' %>">
+    <!-- Card with login and signup buttons -->
+  <% if (!user) { %>
+    <div class="card-deck-wrapper">
+      <div class="card-deck">
+        <div class="card col-sm-4 p-5 mx-auto my-5" style="border: none">
+          <img class="card-img-top start-logo mx-auto" src="images/dog-log-typo.svg" alt="Petify-logo">
+          <div class="card-block">
+              <!-- Trigger the modal SIGNUP with a button -->
+              <button type="button" class="btn btn-outline-dark start-btn" data-toggle="modal" data-target="#register">Register your pet</button>
+              <!-- Trigger the modal LOGIN with a button -->
+              <button type="button" class="btn btn-outline-dark start-btn" data-toggle="modal" data-target="#login">Login</button>
+            </div>
           </div>
         </div>
       </div>
+     <% } %>
     </div>
-   <% } %>
-  </div>
+</div>
+
 
 
   <!-- Open the modal SIGNUP-->
