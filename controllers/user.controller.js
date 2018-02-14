@@ -1,15 +1,26 @@
 const User = require('../models/user.model');
-const {getSex} = require('../config/getSex');
+const Post = require('../models/posts.model');
+
 
 module.exports.show = (req, res) => {
   console.log(res.locals.user);
   const {_id} = res.locals.user;
+
+// Find user
   User.findById(_id)
   .then((user) => {
-    const sex = getSex(user.sex);
+    // Find posts of user
+      Post.find({owner_id: user.id})
+      .then((posts) => {
+        res.render('user/user', {
+          posts: posts
+        });
+      })
+      .catch(err => console.log(err));
+
     res.render('user/user', {
       user,
-      sex
+      posts
     });
   })
   .catch(err => {

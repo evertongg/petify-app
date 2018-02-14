@@ -26,7 +26,7 @@
           <p class="l-height"><strong>I live in : </strong> <%= user.location %> </p>
           <p class="l-height"><strong>I am a: </strong> <%= user.animaltype %> </p>
           <p class="l-height"><strong>My breed: </strong> <%= user.breed %> </p>
-          <img src="<%= sex %>" alt="sex: <%= sex %>">
+          <img src="<%= user.sex %>" alt="sex: <%= user.sex %>">
       </div>
 
             <div class="container">
@@ -41,6 +41,18 @@
                   </form>
                 </div>
               </div>
+            </div>
+
+
+
+            <div class="container">
+              <% if(posts !== 'undefined') {
+              posts.forEach((post) => { %>
+                <div class="row border">
+                  <%= post.message %>
+                </div>
+                <% })
+              } %>
             </div>
 
 

@@ -16,9 +16,8 @@ module.exports.addPost = (req, res, next) => {
   post.save()
   .then(() => {
     console.log('post saved');
+    res.redirect('/user');
   }).catch((err) => {
     console.log(err);
   });
-
-  res.render('user');
 };
