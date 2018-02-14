@@ -2,15 +2,15 @@
   <div class="row" style="min-height: 750px">
     <div class="col">
       <div class="row">
-        <img src="images/placeholder.jpg" alt="profile picture" class="rounded-circle">
+        <img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle">
       </div>
       <br>
       <div class="row mx-4 mt-4">
-          <div class="col"><img src="images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="col"><img src="images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
+          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
+          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
           <div class="w-100"></div>
-          <div class="col"><img src="images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="col"><img src="images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
+          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
+          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
       </div>
     </div>
     <div class="col-6 silver rounded">
@@ -26,16 +26,17 @@
           <p class="l-height"><strong>I live in : </strong> <%= user.location %> </p>
           <p class="l-height"><strong>I am a: </strong> <%= user.animaltype %> </p>
           <p class="l-height"><strong>My breed: </strong> <%= user.breed %> </p>
-          <img src="<%= sex %>" alt="sex: <%= sex %>">
+          <img src="" alt="sex: ">
       </div>
 
+<!-- Section for writing post -->
             <div class="container">
               <div class="card my-4">
                 <h5 class="card-header">Leave a Comment:</h5>
                 <div class="card-body">
                   <form action="/post/<%= user.id %>" method="post">
                     <div class="form-group">
-                      <textarea class="form-control" rows="3"></textarea>
+                      <textarea class="form-control" rows="3" name="message"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
@@ -43,9 +44,24 @@
               </div>
             </div>
 
-
-      <hr/>
+<!-- Showing posts -->
+            <div class="container">
+              <% if(posts !== 'undefined') {
+              posts.forEach((post) => { %>
+                <div class="card mx-1 px-2">
+                  <%= post.message %>
+                </div>
+                <small class="form-text text-muted ml-3" style="font-size: 10px;">
+                  <%= moment %>
+                </small>
+                <br>
+                <% })
+              } %>
+            </div>
+        <hr/>
     </div>
+
+<!-- Followers section -->
     <div class="col border m-4 rounded">
       <div class="h-100">
         <div class="row m-3">
