@@ -1,9 +1,9 @@
 const User = require('../models/user.model');
 const Post = require('../models/posts.model');
+const moment = require('moment');
 
 
 module.exports.show = (req, res) => {
-  console.log(res.locals.user);
   const {_id} = res.locals.user;
 
 // Find user
@@ -13,7 +13,8 @@ module.exports.show = (req, res) => {
       Post.find({owner_id: user.id})
       .then((posts) => {
         res.render('user/user', {
-          posts: posts
+          posts: posts,
+          moment: moment(posts.date).format('lll')
         });
       })
       .catch(err => console.log(err));

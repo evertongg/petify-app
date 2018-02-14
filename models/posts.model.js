@@ -13,9 +13,13 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  date: {
+    type: Date,
+    default: Date.now
+  },
   likes: Number,
   followers_ids: [String],
-})
+});
 
 const Post = mongoose.model('Post', postSchema);
 module.exports = Post;
