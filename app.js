@@ -31,6 +31,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayout);
 app.set('layout', 'layouts/main');
 
+// caching disabled for every route
+app.use(function(req, res, next) {
+  res.setHeader('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  next();
+});
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -70,11 +76,15 @@ app.use((req,res,next) => {
   next();
 });
 
+
 app.use('/', auth);
 app.use('/user', user);
 app.use('/profile', profile);
 app.use('/search', search);
 app.use('/post', post);
+app.get('*', function(req, res, next){
+  res.render('error');
+});
 
 
 // catch 404 and forward to error handler
