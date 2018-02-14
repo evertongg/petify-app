@@ -26,9 +26,9 @@
           <p class="l-height"><strong>I live in : </strong> <%= user.location %> </p>
           <p class="l-height"><strong>I am a: </strong> <%= user.animaltype %> </p>
           <p class="l-height"><strong>My breed: </strong> <%= user.breed %> </p>
-          <img src="" alt="sex:">
-
+          <img src="/images/<%= user.sex%>.png" alt="gender">
       </div>
+    <hr/>
 <!-- Showing posts -->
             <div class="container">
               <% if(posts !== 'undefined') {
@@ -43,7 +43,6 @@
                 <% })
               } %>
             </div>
-      <hr/>
     </div>
     <div class="col border ml-2">
       <div class="h-100">

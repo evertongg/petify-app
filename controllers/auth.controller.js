@@ -7,13 +7,14 @@ require('../config/config.passport')(passport);
 // GET HOME page with login and signup modals.
 module.exports.show = (req, res) => {
   let errors;
-  res.render('index', {
-    errors,
-    petname: req.body.petname,
-    ownername: req.body.ownername,
-    email: req.body.email,
-    location: req.body.location,
-  });
+
+    res.render('index', {
+      errors,
+      petname: req.body.petname,
+      ownername: req.body.ownername,
+      email: req.body.email,
+      location: req.body.location,
+    });
 };
 
 // DO SIGN UP and save user in the DB
