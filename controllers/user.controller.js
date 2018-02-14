@@ -14,7 +14,6 @@ module.exports.show = (req, res) => {
       .then((posts) => {
         res.render('user/user', {
           posts: posts,
-          moment: moment(posts.date).format('lll')
         });
       })
       .catch(err => console.log(err));

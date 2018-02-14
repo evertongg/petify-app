@@ -47,12 +47,12 @@
 <!-- Showing posts -->
             <div class="container">
               <% if(posts !== 'undefined') {
-              posts.forEach((post) => { %>
+              posts.reverse().forEach((post) => { %>
                 <div class="card mx-1 px-2">
                   <%= post.message %>
                 </div>
                 <small class="form-text text-muted ml-3" style="font-size: 10px;">
-                  <%= moment %>
+                  <%= post.date %>
                 </small>
                 <br>
                 <% })
