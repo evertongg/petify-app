@@ -14,8 +14,7 @@ const postSchema = new mongoose.Schema({
     required: false
   },
   date: {
-    type: Date,
-    default: Date.now
+    type: String
   },
   likes: Number,
   followers_ids: [String],
