@@ -11,11 +11,15 @@ const postSchema = new mongoose.Schema({
   },
   attachment: {
     type: String,
-    required: true
+    required: false
+  },
+  date: {
+    type: Date,
+    default: Date.now
   },
   likes: Number,
   followers_ids: [String],
-})
+});
 
 const Post = mongoose.model('Post', postSchema);
 module.exports = Post;
