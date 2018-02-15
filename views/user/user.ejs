@@ -2,8 +2,25 @@
   <div class="row" style="min-height: 750px">
     <div class="col">
       <div class="row">
-        <img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle">
+        <% if(typeof pictures !== 'undefined') { %>
+          <% pictures.forEach((picture) => { %>
+         <h3><%= picture.name %></h3>
+         <img src="/uploads/<%= picture.pic_path %>" alt="<%= picture.pic_name %>" />
+       <% }) %>
+    <% } %>
       </div>
+
+<!-- Photo upload test -->
+<section>
+  <h2>Upload your photo</h2>
+  <form action="/user/upload" method="post" enctype="multipart/form-data">
+    <input type="text" name="name">
+    <input type="file" name="photo">
+    <input type="submit" value="Save">
+  </form>
+</section>
+
+
       <br>
       <div class="row mx-4 mt-4">
           <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
