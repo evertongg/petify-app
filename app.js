@@ -10,6 +10,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressLayout = require('express-ejs-layouts');
 const passport = require('passport');
+const multer = require('multer');
+const upload = multer({dest: './public/uploads/'});
 
 const auth = require('./routes/auth.routes');
 const user = require('./routes/user.routes');
