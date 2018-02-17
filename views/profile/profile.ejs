@@ -53,25 +53,29 @@
       <hr/>
       <!-- Showing posts -->
       <div class="container">
-        <% if(posts !== 'undefined') {
-              posts.reverse().forEach((post) => { %>
+        <% if(typeof posts != 'undefined') { %>
+          <% posts.reverse().forEach(post => { %>
           <small class="form-text text-muted ml-3" style="font-size: 10px;">
             <%= post.date %>
           </small>
+
           <div class="card mx-1 px-2 post-box">
             <%= post.message %>
-                <div class="like-box">
-                  <div class="logo-toggle black-b">
+            <div class="like-box">
+              <% if (!post.likes.includes(user._id)) { %>
+                <div class="logo-toggle black-b">
                     <img src="/images/bone.png" class="like-logo">
                   </div>
-                  <div class="logo-toggle yellow-b hidden">
-                    <img src="/images/bone-yellow.png" class="like-logo">
-                  </div>
-                </div>
+              <% } else { %>
+              <div class="logo-toggle yellow-b">
+                <img src="/images/bone-yellow.png" class="like-logo">
+              </div>
+              <% } %>
+            </div>
           </div>
           <br>
-          <% })
-              } %>
+          <% }) %>
+        <% } %>
       </div>
     </div>
     <div class="col border ml-2">
