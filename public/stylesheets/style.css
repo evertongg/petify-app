@@ -49,3 +49,65 @@
 .black {
   background-color: #000000;
 }
+
+.like-btn {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background: #1098F7;
+}
+
+.post-box {
+  min-height: 75px;
+}
+
+.like-box {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 7px;
+  bottom: 9px;
+}
+
+.transform-box {
+  animation-name: pop;
+  animation-duration: 0.3s;
+}
+
+.like-logo {
+  width: 22px;
+  padding: 3px;
+}
+
+.logo-toggle,
+.logo-toggle-active {
+  position: absolute;
+  border-radius: 50px;
+}
+
+.hidden {
+  display: none;
+}
+
+.black-b {
+  border: 1px solid black;
+}
+
+.yellow-b {
+  border: 1px solid #FADB60;
+}
+
+/* The animation code */
+@keyframes pop {
+    0% {
+    bottom: 9px;
+    }
+    50% {
+    bottom: 14px;
+    }
+    100% {
+    bottom: 9px;
+    }
+
+}
