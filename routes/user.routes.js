@@ -3,7 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/user.controller');
 const secure = require('../middleware/secure.middleware');
 const multer = require('multer');
-const upload = multer({dest: '../uploads'});
+const upload = multer({dest: '../public/uploads/'});
 
 router.get('/', secure.isAuthenticated, userController.show);
 router.get('/edit', secure.isAuthenticated, userController.edit);
