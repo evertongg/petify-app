@@ -2,6 +2,7 @@ const User = require('../models/user.model');
 const Post = require('../models/posts.model');
 const Picture = require('../models/picture.model');
 const moment = require('moment');
+const path = require('path');
 
 module.exports.show = (req, res) => {
   const {_id} = res.locals.user;
@@ -66,7 +67,7 @@ module.exports.savePic = (req, res) => {
 
   const pic = new Picture({
     name: req.body.name,
-    pic_path: `/uploads/${req.file.filename}`,
+    pic_path: `public/uploads/${req.file.filename}`,
     pic_name: req.file.originalname
   });
 

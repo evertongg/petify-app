@@ -67,6 +67,7 @@
               posts.reverse().forEach((post) => { %>
                 <div class="card mx-1 px-2">
                   <%= post.message %>
+                  <button type="like-btn" name="like">Like</button>
                 </div>
                 <small class="form-text text-muted ml-3" style="font-size: 10px;">
                   <%= post.date %>

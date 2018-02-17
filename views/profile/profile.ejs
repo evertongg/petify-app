@@ -33,12 +33,20 @@
             <div class="container">
               <% if(posts !== 'undefined') {
               posts.reverse().forEach((post) => { %>
-                <div class="card mx-1 px-2">
-                  <%= post.message %>
-                </div>
                 <small class="form-text text-muted ml-3" style="font-size: 10px;">
                   <%= post.date %>
                 </small>
+                <div class="card mx-1 px-2 post-box">
+                  <%= post.message %>
+                  <div class="like-box">
+                    <div class="logo-toggle black-b">
+                      <img src="/images/bone.png" class="like-logo">
+                    </div>
+                    <div class="logo-toggle yellow-b hidden">
+                      <img src="/images/bone-yellow.png" class="like-logo">
+                    </div>
+                  </div>
+                </div>
                 <br>
                 <% })
               } %>
