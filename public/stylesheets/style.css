@@ -193,17 +193,26 @@
 .post-pictures{
   position: relative;
   border-radius: 10%;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   overflow: hidden;
 }
 
 .post-img{
   position: absolute;
-  width: 300px;
+  width: 200px;
   top: -9999px;
   left: -9999px;
   right: -9999px;
   bottom: -9999px;
   margin: auto;
+}
+
+/* Style upload button posts */
+input[type="file"] {
+    display: none;
+}
+
+.inline {
+  display: inline;
 }

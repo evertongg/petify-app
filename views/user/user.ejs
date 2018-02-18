@@ -70,15 +70,16 @@
             <div class="container">
 
               <div class="card my-4">
-                <h5 class="card-header">Share moments:</h5>
+                <h6 class="card-header">Share your moments with <%=user.petname%></h6>
                 <div class="card-body">
                   <form action="/post/<%= user.id %>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                       <textarea class="form-control" rows="3" name="message"></textarea>
-                      <label for="exampleFormControlFile1">Example file input</label>
-                      <input type="file" class="form-control-file" name="attach">
+                      <button type="submit" class="btn btn-outline-success">Share</button>
+                      <label for="attachment" class="btn btn-outline-secondary mt-2"> Upload picture
+                        <input id="attachment" type="file" class="form-control-file" name="attach">
+                      </label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Share</button>
                   </form>
                 </div>
               </div>
