@@ -64,13 +64,29 @@ module.exports.saveChanges = (req, res, next) => {
 
 
 module.exports.savePic = (req, res) => {
+  const {_id} = res.locals.user;
+
   const pic = new Picture({
     owner_id: req.session.passport.user,
     pic_path: `../../uploads/${req.file.filename}`,
     pic_name: req.file.originalname
   });
 
-  pic.save((err) => {
-      res.redirect('/user');
+  pic.save()
+  .then((picture) => {
+    User.findById(_id)
+    .then((user) => {
+      user.pictures = picture.pic_path;
+
+      user.save()
+      .then(user => {
+        res.redirect('/user');
+      });
+
+
+    });
+  })
+  .catch((err) => {
+    console.log(err);
   });
 };
