@@ -21,7 +21,8 @@
       </div>
       <hr/>
       <div class="container">
-        <form action="/register" method="post">
+        <form action="/user/edit?_method=PUT" method="post">
+          <input type="hidden" name="_method" value="put">
           <div class="form-group">
             <label for="exampleFormControlFile1">Add picture</label>
             <input type="file" class="form-control-file" id="exampleFormControlFile1">
@@ -37,7 +38,7 @@
             </div>
             <div class="form-group">
               <label for="exampleFormControlTextarea1">About me</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <textarea class="form-control" name="bio" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
             <div class="form-group">
               <label for="name">Location</label>

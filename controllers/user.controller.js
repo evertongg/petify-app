@@ -60,6 +60,33 @@ module.exports.addPost = (req, res, next) => {
   res.send('sending post');
 };
 
+// edit from process
+module.exports.saveChanges = (req, res, next) => {
+  const {_id} = res.locals.user;
+// Find user
+  User.findById(_id)
+  .then(user => {
+    //new value
+    user.petname = req.body.petname,
+    user.ownername = req.body.ownername,
+    user.bio = req.body.bio,
+    user.location = req.body.location,
+    user.animaltype = req.body.animaltype,
+    user.breed = req.body.breed,
+    user.birthdate = req.body.birthdate,
+    user.skills = req.body.skills,
+    user.character = req.body.character,
+    user.sex = req.body.sex
+
+    //save edited idea
+    user.save()
+    .then(user => {
+      req.flash('success_msg', 'Profile changes saved');
+      res.redirect('/user');
+    });
+  });
+};
+
 
 
 module.exports.savePic = (req, res) => {

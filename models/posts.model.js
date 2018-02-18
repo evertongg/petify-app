@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
   owner_id: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'User',
     required: true
   },
   message: {
@@ -17,6 +18,7 @@ const postSchema = new mongoose.Schema({
     type: String
   },
   likes: [String]
+
 });
 
 const Post = mongoose.model('Post', postSchema);
