@@ -4,7 +4,7 @@
 
 <!-- Show profile picture -->
       <div class="row profile-pic-container">
-        <% if (pictures && (pictures.length > 1)) { %>
+        <% if (pictures && (pictures.length >= 1)) { %>
             <div class="photo-box my-4 mr-3">
               <img src="/<%= pictures[0].pic_path %>" alt="<%= pictures[0].pic_name %>" class="picture-size"/>
             </div>
@@ -24,12 +24,13 @@
             </div>
           </form>
       </div>
+      
 
 
 
 
 <!-- Show smaller pictures -->
-<% if(pictures && (pictures.length > 1)) { %>
+<% if(pictures && (pictures.length >= 1)) { %>
   <% pictures.forEach((picture) => { %>
     <div class="photo-box-small my-4 mr-3">
       <img src="/<%= picture.pic_path %>" alt="<%= picture.pic_name %>" class="picture-size-small"/>
