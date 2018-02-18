@@ -1,26 +1,35 @@
 <div class="container mt-4">
   <div class="row" style="min-height: 750px">
     <div class="col">
-      <div class="row">
-        <img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle">
+
+<!-- Show profile picture -->
+      <div class="row profile-pic-container">
+        <% if (pictures && (pictures.length > 1)) { %>
+            <div class="photo-box my-4 mr-3">
+              <img src="/<%= pictures[0].pic_path %>" alt="<%= pictures[0].pic_name %>" class="picture-size"/>
+            </div>
+        <% } else { %>
+            <div class="photo-box my-4 mr-3">
+              <img src="/images/placeholder.jpg" class="picture-size">
+            </div>
+        <% } %>
       </div>
-      <br>
-      <div class="row mx-4 mt-4">
-        <div class="col">
-          <img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px">
-        </div>
-        <div class="col">
-          <img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px">
-        </div>
-        <div class="w-100"></div>
-        <div class="col">
-          <img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px">
-        </div>
-        <div class="col">
-          <img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px">
-        </div>
-      </div>
+
+<!-- Show smaller pictures -->
+<% if(pictures && (pictures.length > 1)) { %>
+  <% pictures.forEach((picture) => { %>
+    <div class="photo-box-small my-4 mr-3">
+      <img src="/<%= picture.pic_path %>" alt="<%= picture.pic_name %>" class="picture-size-small"/>
     </div>
+<% }) %>
+<% } else { %>
+  <div class="photo-box-small mx-4 mt-4">
+    <img src="/images/placeholder.jpg" class="picture-size-small">
+  </div>
+<% } %>
+      <br>
+    </div>
+
     <div class="col-6 silver">
       <div class="row ml-2 mt-2">
         <h1 class="display-4">
@@ -34,7 +43,7 @@
        <h2>My owner: <%= user.ownername %></h2>
           <p class="l-height"><strong>About me: </strong> <%= user.bio %> </p>
           <p class="l-height"><strong>Location : </strong> <%= user.location %> </p>
-          <p class="l-height"><strong>: </strong> <%= user.animaltype %> </p>
+          <p class="l-height"><strong>I'm a: </strong> <%= user.animaltype %> </p>
           <p class="l-height"><strong>Species: </strong> <%= user.breed %> </p>
           <p class="l-height"><strong>About me: </strong> <%= user.bio %> </p>
           <p class="l-height"><strong>I live in : </strong> <%= user.location %> </p>

@@ -52,7 +52,8 @@ const userSchema = new mongoose.Schema({
     }],
   posts: [String],
   paws: Number,
-  paw_ids: [String]
+  paw_ids: [String],
+  posts: [String]
 });
 
 // Encrypting password
