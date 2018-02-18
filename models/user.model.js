@@ -32,11 +32,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  pictures: [{
-    url: String,
-    isProfilePic: Boolean,
-    uploaded: Date
-    }],
+  pictures: String,
   birthdate: String,
   character: [String],
   bio: String,
