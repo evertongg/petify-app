@@ -1,4 +1,4 @@
-<div class="container mt-4" >
+<div class="container mt-4">
   <div class="row" style="min-height: 750px">
     <div class="col">
       <div class="row">
@@ -6,11 +6,19 @@
       </div>
       <br>
       <div class="row mx-4 mt-4">
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="w-100"></div>
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
+        <div class="col">
+          <img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px">
+        </div>
+        <div class="col">
+          <img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px">
+        </div>
+        <div class="w-100"></div>
+        <div class="col">
+          <img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px">
+        </div>
+        <div class="col">
+          <img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px">
+        </div>
       </div>
     </div>
     <div class="col-6 silver">
@@ -21,7 +29,9 @@
       </div>
       <hr/>
       <div class="container">
-        <h2>My owner: <%= user.ownername %></h2>
+
+
+       <h2>My owner: <%= user.ownername %></h2>
           <p class="l-height"><strong>About me: </strong> <%= user.bio %> </p>
           <p class="l-height"><strong>Location : </strong> <%= user.location %> </p>
           <p class="l-height"><strong>: </strong> <%= user.animaltype %> </p>
@@ -33,35 +43,32 @@
           <img src="/images/<%= user.sex%>.png" alt="gender">
       </div>
     <hr/>
-<!-- Showing posts -->
-            <div class="container">
-              <% if(posts !== 'undefined') {
-              posts.reverse().forEach((post) => { %>
-                <small class="form-text text-muted ml-3" style="font-size: 10px;">
-                  <%= post.date %>
-                </small>
-                <div class="card mx-1 px-2 post-box">
-                  <%= post.message %>
+      <!-- Showing posts -->
+      <div class="container">
+        <% if(typeof posts != 'undefined') { %>
+          <% posts.reverse().forEach(post => { %>
+          <small class="form-text text-muted ml-3" style="font-size: 10px;">
+            <%= post.date %>
+          </small>
 
-                  <form action="/profile/like/<%= post.id %>?_method=PUT" method="post">
-                    <input type="hidden" name="_method" value="put">
-                    <button type="submit" name="button">Like</button>
-                  </form>
-
-
-                  <!-- <div class="like-box" name="<%= post._id %>" onclick="likePost(<%= post.id %>)">
-                    <div class="logo-toggle black-b">
-                      <img src="/images/bone.png" class="like-logo">
-                    </div>
-                    <div class="logo-toggle yellow-b hidden">
-                      <img src="/images/bone-yellow.png" class="like-logo">
-                    </div>
-                  </div> -->
-                </div>
-                <br>
-                <% })
-              } %>
+          <div class="card mx-1 px-2 post-box">
+            <%= post.message %>
+            <div class="like-box">
+              <% if (!post.likes.includes(user._id)) { %>
+                <div class="logo-toggle black-b">
+                    <img src="/images/bone.png" class="like-logo">
+                  </div>
+              <% } else { %>
+              <div class="logo-toggle yellow-b">
+                <img src="/images/bone-yellow.png" class="like-logo">
+              </div>
+              <% } %>
             </div>
+          </div>
+          <br>
+          <% }) %>
+        <% } %>
+      </div>
     </div>
     <div class="col border ml-2">
       <div class="h-100">
