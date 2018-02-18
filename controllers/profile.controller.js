@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const Post = require('../models/posts.model');
 const Picture = require('../models/picture.model');
+const Attachment = require('../models/attachments.model');
 const moment = require('moment');
 
 

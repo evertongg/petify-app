@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const Post = require('../models/posts.model');
 const Picture = require('../models/picture.model');
+const moment = require('moment');
 
 module.exports.show = (req, res) => {
   const {_id} = res.locals.user;
@@ -8,7 +9,6 @@ module.exports.show = (req, res) => {
 // Find user
   User.findById(_id)
   .then((user) => {
-    // Find posts of user
       Post.find({owner_id: user._id})
       .then((posts) => {
         Picture.find({owner_id: user._id})
@@ -47,7 +47,7 @@ module.exports.saveChanges = (req, res, next) => {
     user.location = req.body.location,
     user.animaltype = req.body.animaltype,
     user.breed = req.body.breed,
-    user.birthdate = req.body.birthdate,
+    user.birthdate = moment(req.body.birthdate).format('LL'),
     user.skills = req.body.skills,
     user.character = req.body.character,
     user.sex = req.body.sex;
