@@ -27,3 +27,23 @@ module.exports.show = (req, res, next) => {
     console.log(err);
   });
 };
+
+module.exports.like = (req, res, next) => {
+  console.log('doing like');
+  const id = req.params.id;
+  const owner_id = req.session.id;
+
+  Post.findById(id)
+  .then((post) => {
+    console.log(post);
+
+    post.save()
+    .then(post => {
+      req.flash('success_msg', 'Thanks for your like!');
+      res.redirect(`/profile/${owner_id}`, {
+        
+      })
+    });
+  })
+  .catch(err => console.log(err));
+};
