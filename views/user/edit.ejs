@@ -1,19 +1,6 @@
-<div class="container mt-4" >
+<div class="container mt-4 add-background" >
   <div class="row" style="min-height: 750px">
-    <div class="col-4">
-      <div class="row mx-auto prof-container">
-        <img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle">
-      </div>
-      <br>
-      <div class="row mx-4 mt-4">
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="w-100"></div>
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-      </div>
-    </div>
-    <div class="col-8 silver rounded">
+    <div class="col-8 silver rounded mx-auto">
       <div class="row ml-2 mt-2">
         <h1 class="display-4">
           Edit profile
@@ -23,10 +10,6 @@
       <div class="container">
         <form action="/user/edit?_method=PUT" method="post">
           <input type="hidden" name="_method" value="put">
-          <div class="form-group">
-            <label for="exampleFormControlFile1">Add picture</label>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-          </div>
           <div class="form-group">
             <label for="name">Petname</label>
             <input name="petname" type="text" class="form-control" value="<%= user.petname %>" >
@@ -38,7 +21,8 @@
             </div>
             <div class="form-group">
               <label for="exampleFormControlTextarea1">About me</label>
-              <textarea class="form-control" name="bio" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <textarea class="form-control" name="bio" id="exampleFormControlTextarea1" rows="3"
+              ><%= user.bio %></textarea>
             </div>
             <div class="form-group">
               <label for="name">Location</label>
@@ -76,8 +60,8 @@
             </div>
             <div class="form-group row">
                 <label for="example-date-input" class="col-2 col-form-label">Birthdate</label>
-                <div class="col-10">
-              <input class="form-control" name="birthdate" type="date" value="" id="example-date-input">
+            <div class="col-10">
+              <input class="form-control" name="birthdate" type="date" value="<%= user.birthdate %>" id="example-date-input">
             </div>
             </div>
             <div class="form-group">

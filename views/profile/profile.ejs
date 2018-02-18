@@ -40,20 +40,37 @@
       <div class="container">
 
 
-       <h2>My owner: <%= user.ownername %></h2>
-          <p class="l-height"><strong>About me: </strong> <%= user.bio %> </p>
+          <h2>My owner: <%= user.ownername %></h2>
+          <img src="/images/<%= user.sex%>.png" alt="gender">
+          <br>
+          <br>
+          <p class="bio"> <% if(user.bio) { %>
+            "<%= user.bio %>"
+            <%  } else { %>
+                "About me..."
+            <%  } %> </p>
           <p class="l-height"><strong>Location : </strong> <%= user.location %> </p>
           <p class="l-height"><strong>I'm a: </strong> <%= user.animaltype %> </p>
           <p class="l-height"><strong>Species: </strong> <%= user.breed %> </p>
-          <p class="l-height"><strong>About me: </strong> <%= user.bio %> </p>
-          <p class="l-height"><strong>I live in : </strong> <%= user.location %> </p>
-          <p class="l-height"><strong>I am a: </strong> <%= user.animaltype %> </p>
-          <p class="l-height"><strong>My breed: </strong> <%= user.breed %> </p>
-          <img src="/images/<%= user.sex%>.png" alt="gender">
+          <p class="l-height"><strong>Birthdate: </strong> <%= user.birthdate %> </p>
+          <p class="l-height"><strong>Character: </strong></p>
+           <% user.character.forEach((el) => { %>
+          <p class="l-height">
+            <%= el %>
+          </p>
+            <%  }) %>
+          <br>
+          <p class="l-height"><strong>Favorite activities: </strong></p>
+          <% user.skills.forEach((el) => { %>
+          <p class="l-height">
+            <%= el %>
+          </p>
+          <%  }) %>
       </div>
     <hr/>
       <!-- Showing posts -->
       <div class="container">
+        
         <% if(typeof posts != 'undefined') { %>
           <% posts.reverse().forEach(post => { %>
           <small class="form-text text-muted ml-3" style="font-size: 10px;">

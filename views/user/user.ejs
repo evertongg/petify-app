@@ -24,14 +24,14 @@
             </div>
           </form>
       </div>
-      
+
 
 
 
 
 <!-- Show smaller pictures -->
 <% if(pictures && (pictures.length >= 1)) { %>
-  <% pictures.forEach((picture) => { %>
+  <% pictures.reverse().forEach((picture) => { %>
     <div class="photo-box-small my-4 mr-3">
       <img src="/<%= picture.pic_path %>" alt="<%= picture.pic_name %>" class="picture-size-small"/>
     </div>
@@ -53,43 +53,59 @@
       <hr/>
       <div class="container">
         <h2>My owner: <%= user.ownername %></h2>
-          <p class="l-height"><strong>About me: </strong> <%= user.bio %> </p>
+          <p class="bio"> <% if(user.bio) { %>
+            "<%= user.bio %>"
+            <%  } else { %>
+                "About me..."
+            <%  } %> </p>
           <p class="l-height"><strong>I live in : </strong> <%= user.location %> </p>
           <p class="l-height"><strong>I am a: </strong> <%= user.animaltype %> </p>
           <p class="l-height"><strong>My breed: </strong> <%= user.breed %> </p>
           <img src="/images/<%= user.sex%>.png" alt="gender">
       </div>
+      <hr/>
+
 
 <!-- Section for writing post -->
             <div class="container">
+
               <div class="card my-4">
-                <h5 class="card-header">Leave a Comment:</h5>
+                <h5 class="card-header">Share moments:</h5>
                 <div class="card-body">
-                  <form action="/post/<%= user.id %>" method="post">
+                  <form action="/post/<%= user.id %>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                       <textarea class="form-control" rows="3" name="message"></textarea>
-
+                      <label for="exampleFormControlFile1">Example file input</label>
+                      <input type="file" class="form-control-file" name="attach">
                     </div>
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
-
-
-                        <div class="picture">
-                          <input type="file" name="upload-picture" src='/images/photo-camera-black.png'>
-                        </div>
-
+                    <button type="submit" class="btn btn-primary">Share</button>
                   </form>
                 </div>
               </div>
             </div>
+
+            <!-- <form action="/user/upload" method="post" enctype="multipart/form-data" id="pic-upload">
+              <div class="image-upload">
+                <label for="pic-select">
+                  <img src="/images/image-add-button.png" class="upload-icon"/>
+                </label>
+                <input id="pic-select" type="file" name="photo"/>
+              </div>
+            </form> -->
+
+
 
 <!-- Showing posts -->
             <div class="container">
               <% if(posts !== 'undefined') {
               posts.reverse().forEach((post) => { %>
                 <div class="card mx-1 px-2">
+                  <% if (typeof post.picture_id[0] !== 'undefined') { %>
+                    <div class="post-pictures">
+                      <img src="<%= post.picture_id[0] %>" alt="" class="post-img">
+                    </div>
+                  <% } %>
                   <%= post.message %>
-                  <button type="like-btn" name="like">Like</button>
                 </div>
                 <small class="form-text text-muted ml-3" style="font-size: 10px;">
                   <%= post.date %>
