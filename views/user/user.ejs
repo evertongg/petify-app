@@ -1,34 +1,47 @@
 <div class="container mt-4" >
   <div class="row" style="min-height: 750px">
     <div class="col">
-      <div class="row">
-        <% if(typeof pictures !== 'undefined') { %>
-          <% pictures.forEach((picture) => { %>
-         <h3><%= picture.name %></h3>
-         <img src="/uploads/<%= picture.pic_path %>" alt="<%= picture.pic_name %>" />
-       <% }) %>
-    <% } %>
+
+<!-- Show profile picture -->
+      <div class="row profile-pic-container">
+        <% if (pictures && (pictures.length > 1)) { %>
+            <div class="photo-box my-4 mr-3">
+              <img src="/<%= pictures[0].pic_path %>" alt="<%= pictures[0].pic_name %>" class="picture-size"/>
+            </div>
+        <% } else { %>
+            <div class="photo-box my-4 mr-3">
+              <img src="/images/placeholder.jpg" class="picture-size">
+            </div>
+        <% } %>
+
+        <!-- Photo upload button -->
+          <form action="/user/upload" method="post" enctype="multipart/form-data" id="pic-upload">
+            <div class="image-upload">
+              <label for="pic-select">
+                <img src="/images/image-add-button.png" class="upload-icon"/>
+              </label>
+              <input id="pic-select" type="file" name="photo"/>
+            </div>
+          </form>
       </div>
 
-<!-- Photo upload test -->
-<section>
-  <h2>Upload your photo</h2>
-  <form action="/user/upload" method="post" enctype="multipart/form-data">
-    <input type="text" name="name">
-    <input type="file" name="photo">
-    <input type="submit" value="Save">
-  </form>
-</section>
 
+
+
+<!-- Show smaller pictures -->
+<% if(pictures && (pictures.length > 1)) { %>
+  <% pictures.forEach((picture) => { %>
+    <div class="photo-box-small my-4 mr-3">
+      <img src="/<%= picture.pic_path %>" alt="<%= picture.pic_name %>" class="picture-size-small"/>
+    </div>
+<% }) %>
+<% } else { %>
+  <div class="photo-box-small mx-4 mt-4">
+    <img src="/images/placeholder.jpg" class="picture-size-small">
+  </div>
+<% } %>
 
       <br>
-      <div class="row mx-4 mt-4">
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="w-100"></div>
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-      </div>
     </div>
     <div class="col-6 silver rounded">
       <div class="row ml-2 mt-2">
@@ -54,16 +67,16 @@
                   <form action="/post/<%= user.id %>" method="post">
                     <div class="form-group">
                       <textarea class="form-control" rows="3" name="message"></textarea>
-                      
+
                     </div>
-                    
+
                     <button type="submit" class="btn btn-primary">Submit</button>
-                   
-                       
+
+
                         <div class="picture">
                           <input type="file" name="upload-picture" src='/images/photo-camera-black.png'>
                         </div>
-                     
+
                   </form>
                 </div>
               </div>
