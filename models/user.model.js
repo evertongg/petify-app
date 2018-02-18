@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
     isProfilePic: Boolean,
     uploaded: Date
     }],
-  birthdate: Date,
+  birthdate: String,
   character: [String],
   bio: String,
   skills: [String],
@@ -52,8 +52,7 @@ const userSchema = new mongoose.Schema({
     }],
   posts: [String],
   paws: Number,
-  paw_ids: [String],
-  posts: [String]
+  paw_ids: [String]
 });
 
 // Encrypting password
