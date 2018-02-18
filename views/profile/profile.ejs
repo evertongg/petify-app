@@ -24,33 +24,25 @@
     <div class="col-6 silver">
       <div class="row ml-2 mt-2">
         <h1 class="display-4">
-          <%= user.petname %>
+          Hi, I'm <%= user.petname %>!
         </h1>
       </div>
       <hr/>
       <div class="container">
-        <h2>My owner:
-          <%= user.ownername %>
-        </h2>
-        <p class="l-height">
-          <strong>About me: </strong>
-          <%= user.bio %>
-        </p>
-        <p class="l-height">
-          <strong>I live in : </strong>
-          <%= user.location %>
-        </p>
-        <p class="l-height">
-          <strong>I am a: </strong>
-          <%= user.animaltype %>
-        </p>
-        <p class="l-height">
-          <strong>My breed: </strong>
-          <%= user.breed %>
-        </p>
-        <img src="/images/<%= user.sex%>.png" alt="gender">
+
+
+       <h2>My owner: <%= user.ownername %></h2>
+          <p class="l-height"><strong>About me: </strong> <%= user.bio %> </p>
+          <p class="l-height"><strong>Location : </strong> <%= user.location %> </p>
+          <p class="l-height"><strong>: </strong> <%= user.animaltype %> </p>
+          <p class="l-height"><strong>Species: </strong> <%= user.breed %> </p>
+          <p class="l-height"><strong>About me: </strong> <%= user.bio %> </p>
+          <p class="l-height"><strong>I live in : </strong> <%= user.location %> </p>
+          <p class="l-height"><strong>I am a: </strong> <%= user.animaltype %> </p>
+          <p class="l-height"><strong>My breed: </strong> <%= user.breed %> </p>
+          <img src="/images/<%= user.sex%>.png" alt="gender">
       </div>
-      <hr/>
+    <hr/>
       <!-- Showing posts -->
       <div class="container">
         <% if(typeof posts != 'undefined') { %>

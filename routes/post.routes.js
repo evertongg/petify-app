@@ -11,4 +11,5 @@ router.get('/:id', postController.updatePost);
 router.post('/', exist.existsUploadsFolder, upload.single('photo'), postController.createPost);
 
 
+
 module.exports = router;
