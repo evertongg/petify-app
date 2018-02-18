@@ -2,14 +2,18 @@
   font-family: 'Nunito', sans-serif;
 }
 
-.error {
+body {
+  background-image: url('/images/background-op3.png');
+}
+
+/* .error {
   background-image: url('/images/background.png');
   min-height: 700px;
 }
 
 .add-background {
   background-image: url('/images/background.png')
-}
+} */
 
 .bio {
   padding: 5px;
