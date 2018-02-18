@@ -6,4 +6,5 @@ const secure = require('../middleware/secure.middleware');
 router.post('/:id', postController.addPost);
 
 
+
 module.exports = router;
