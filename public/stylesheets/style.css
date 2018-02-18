@@ -252,3 +252,20 @@ input[type="file"] {
   display: block;
   float: right;
 }
+
+.search-result-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.search-link {
+  text-decoration: none;
+  color: black;
+  font-size: 25px;
+}
+
+.search-link:hover {
+  text-decoration: none;
+  color: #1098F7;
+}
