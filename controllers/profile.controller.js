@@ -1,31 +1,30 @@
 const User = require('../models/user.model');
 const Post = require('../models/posts.model');
+const Picture = require('../models/picture.model');
 const moment = require('moment');
 
 
 module.exports.show = (req, res, next) => {
   const {id} = req.params;
+
   User.findById(id)
   .then((user) => {
-    // Find posts of user
       Post.find({owner_id: id})
       .then((posts) => {
-        res.render('profile/profile', {
-          user,
-          posts: posts,
-          moment: moment(posts.date).format('lll')
-        });
-      })
-      .catch(err => console.log(err));
-
-    res.render('profile/profile', {
-      user,
-      posts
-    });
+        Picture.find({owner_id: user._id})
+        .then((pictures) => {
+          res.render('profile/profile', {
+            user,
+            posts,
+            pictures,
+            moment: moment(posts.date).format('lll')
+          });
+      });
   })
   .catch(err => {
     console.log(err);
   });
+});
 };
 
 module.exports.like = (req, res, next) => {
@@ -40,9 +39,7 @@ module.exports.like = (req, res, next) => {
     post.save()
     .then(post => {
       req.flash('success_msg', 'Thanks for your like!');
-      res.redirect(`/profile/${owner_id}`, {
-        
-      })
+      res.send('saving like')
     });
   })
   .catch(err => console.log(err));
