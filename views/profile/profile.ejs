@@ -16,12 +16,16 @@
     <div class="col-6 silver">
       <div class="row ml-2 mt-2">
         <h1 class="display-4">
-          <%= user.petname %>
+          Hi, I'm <%= user.petname %>!
         </h1>
       </div>
       <hr/>
       <div class="container">
         <h2>My owner: <%= user.ownername %></h2>
+          <p class="l-height"><strong>About me: </strong> <%= user.bio %> </p>
+          <p class="l-height"><strong>Location : </strong> <%= user.location %> </p>
+          <p class="l-height"><strong>: </strong> <%= user.animaltype %> </p>
+          <p class="l-height"><strong>Species: </strong> <%= user.breed %> </p>
           <p class="l-height"><strong>About me: </strong> <%= user.bio %> </p>
           <p class="l-height"><strong>I live in : </strong> <%= user.location %> </p>
           <p class="l-height"><strong>I am a: </strong> <%= user.animaltype %> </p>
@@ -38,14 +42,21 @@
                 </small>
                 <div class="card mx-1 px-2 post-box">
                   <%= post.message %>
-                  <div class="like-box">
+
+                  <form action="/profile/like/<%= post.id %>?_method=PUT" method="post">
+                    <input type="hidden" name="_method" value="put">
+                    <button type="submit" name="button">Like</button>
+                  </form>
+
+
+                  <!-- <div class="like-box" name="<%= post._id %>" onclick="likePost(<%= post.id %>)">
                     <div class="logo-toggle black-b">
                       <img src="/images/bone.png" class="like-logo">
                     </div>
                     <div class="logo-toggle yellow-b hidden">
                       <img src="/images/bone-yellow.png" class="like-logo">
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 <br>
                 <% })
