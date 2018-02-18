@@ -6,7 +6,7 @@
       <div class="row profile-pic-container">
         <% if (pictures && (pictures.length >= 1)) { %>
             <div class="photo-box my-4 mr-3">
-              <img src="/<%= pictures[0].pic_path %>" alt="<%= pictures[0].pic_name %>" class="picture-size"/>
+              <img src="/<%= pictures.reverse()[0].pic_path %>" alt="<%= pictures.reverse()[0].pic_name %>" class="picture-size"/>
             </div>
         <% } else { %>
             <div class="photo-box my-4 mr-3">
@@ -17,7 +17,7 @@
 
 <!-- Show smaller pictures -->
 <% if(pictures && (pictures.length >= 1)) { %>
-  <% pictures.forEach((picture) => { %>
+  <% pictures.reverse().forEach((picture) => { %>
     <div class="photo-box-small my-4 mr-3">
       <img src="/<%= picture.pic_path %>" alt="<%= picture.pic_name %>" class="picture-size-small"/>
     </div>
@@ -30,47 +30,81 @@
       <br>
     </div>
 
-    <div class="col-6 silver">
+    <div class="col-6 silver rounded">
       <div class="row ml-2 mt-2">
         <h1 class="display-4">
           Hi, I'm <%= user.petname %>!
         </h1>
       </div>
       <hr/>
-      <div class="container">
-
-
-          <h2>My owner: <%= user.ownername %></h2>
-          <img src="/images/<%= user.sex%>.png" alt="gender">
-          <br>
-          <br>
-          <p class="bio"> <% if(user.bio) { %>
-            "<%= user.bio %>"
-            <%  } else { %>
-                "About me..."
-            <%  } %> </p>
-          <p class="l-height"><strong>Location : </strong> <%= user.location %> </p>
-          <p class="l-height"><strong>I'm a: </strong> <%= user.animaltype %> </p>
-          <p class="l-height"><strong>Species: </strong> <%= user.breed %> </p>
-          <p class="l-height"><strong>Birthdate: </strong> <%= user.birthdate %> </p>
-          <p class="l-height"><strong>Character: </strong></p>
-           <% user.character.forEach((el) => { %>
-          <p class="l-height">
-            <%= el %>
-          </p>
-            <%  }) %>
-          <br>
-          <p class="l-height"><strong>Favorite activities: </strong></p>
-          <% user.skills.forEach((el) => { %>
-          <p class="l-height">
-            <%= el %>
-          </p>
-          <%  }) %>
-      </div>
+          <div class="container row">
+            <div class="col-9">
+              <h2>My owner: <%= user.ownername %></h2>
+                <p class="bio"> <% if(user.bio) { %>
+                  "<%= user.bio %>"
+                  <%  } else { %>
+                      "About me..."
+                  <%  } %> </p>
+                  <p class="l-height"><strong>Location : </strong> <%= user.location %> </p>
+                  <p class="l-height"><strong>I'm a: </strong> <%= user.animaltype %> </p>
+                  <p class="l-height"><strong>Species: </strong> <%= user.breed %> </p>
+                  <p class="l-height"><strong>Birthdate: </strong> <%= user.birthdate %> </p>
+                  <p class="l-height"><strong>Character: </strong></p>
+                   <% user.character.forEach((el) => { %>
+                  <p class="l-height">
+                    <%= el %>
+                  </p>
+                    <%  }) %>
+                  <br>
+                  <p class="l-height"><strong>Favorite activities: </strong></p>
+                  <% user.skills.forEach((el) => { %>
+                  <p class="l-height">
+                    <%= el %>
+                  </p>
+                  <%  }) %>
+            </div>
+            <div class="col-3 background-icon">
+              <img src="/images/<%= user.sex%>-grey.png" alt="gender" class="gender-img">
+            </div>
+          </div>
     <hr/>
       <!-- Showing posts -->
+
       <div class="container">
-        
+        <% if(posts !== 'undefined') {
+        posts.reverse().forEach((post) => { %>
+
+          <!-- card with content -->
+          <div class="card mx-1 px-3">
+                <div class="row">
+                <!-- if picture show this -->
+                <% if (typeof post.picture_id[0] !== 'undefined') { %>
+                  <div class="post-pictures m-3">
+                    <img src="<%= post.picture_id[0] %>" alt="" class="post-img">
+                  </div>
+
+                  <div class="msg-content col-8 my-2">
+                    <small class="form-text text-muted" style="font-size: 10px;">
+                      <%= post.date %>
+                    </small>
+                    <%= post.message %>
+                  </div>
+                <% } else { %>
+                  <div class="msg-content-only col my-3">
+                    <small class="form-text text-muted" style="font-size: 10px;">
+                      <%= post.date %>
+                    </small>
+                    <%= post.message %>
+                  </div>
+              <%  } %>
+              </div>
+            </div>
+          <br>
+          <% })
+        } %>
+      </div>
+      <!-- <div class="container">
+
         <% if(typeof posts != 'undefined') { %>
           <% posts.reverse().forEach(post => { %>
           <small class="form-text text-muted ml-3" style="font-size: 10px;">
@@ -94,9 +128,9 @@
           <br>
           <% }) %>
         <% } %>
-      </div>
+      </div> -->
     </div>
-    <div class="col border ml-2">
+    <div class="col border ml-2 rounded">
       <div class="h-100">
         <div class="row m-3">
           <h3 class="display-6">Following</h3>
