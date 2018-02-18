@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const flash = require('connect-flash');
+const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -68,6 +69,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(flash());
+
+// method override middleware
+app.use(methodOverride('_method'));
 
 // Global variables
 app.use((req,res,next) => {
