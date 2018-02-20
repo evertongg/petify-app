@@ -20,7 +20,7 @@ module.exports.show = (req, res, next) => {
 
     res.render('profile/profile', {
       user,
-      posts
+      posts: posts
     });
   })
   .catch(err => {
