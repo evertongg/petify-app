@@ -1,95 +1,158 @@
 <div class="container mt-4" >
   <div class="row" style="min-height: 750px">
     <div class="col">
-      <div class="row">
-        <% if(typeof pictures !== 'undefined') { %>
-          <% pictures.forEach((picture) => { %>
-         <h3><%= picture.name %></h3>
-         <img src="/uploads/<%= picture.pic_path %>" alt="<%= picture.pic_name %>" />
-       <% }) %>
-    <% } %>
+
+<!-- Show profile picture -->
+      <div class="row profile-pic-container">
+        <% if (pictures && (pictures.length >= 1)) { %>
+            <div class="photo-box my-4 mr-3">
+              <img src="/<%= pictures.reverse()[0].pic_path %>" alt="<%= pictures.reverse()[0].pic_name %>" class="picture-size"/>
+            </div>
+        <% } else { %>
+            <div class="photo-box my-4 mr-3">
+              <img src="/images/placeholder.jpg" class="picture-size">
+            </div>
+        <% } %>
+
+        <!-- Photo upload button -->
+          <form action="/user/upload" method="post" enctype="multipart/form-data" id="pic-upload">
+            <div class="image-upload">
+              <label for="pic-select">
+                <img src="/images/image-add-button.png" class="upload-icon"/>
+              </label>
+              <input id="pic-select" type="file" name="photo"/>
+            </div>
+          </form>
       </div>
 
-<!-- Photo upload test -->
-<section>
-  <h2>Upload your photo</h2>
-  <form action="/user/upload" method="post" enctype="multipart/form-data">
-    <input type="text" name="name">
-    <input type="file" name="photo">
-    <input type="submit" value="Save">
-  </form>
-</section>
 
+
+
+
+<!-- Show smaller pictures -->
+<% if(pictures && (pictures.length >= 1)) { %>
+  <% pictures.reverse().forEach((picture) => { %>
+    <div class="photo-box-small m-2 ">
+      <img src="/<%= picture.pic_path %>" alt="<%= picture.pic_name %>" class="picture-size-small"/>
+    </div>
+<% }) %>
+<% } else { %>
+  <div class="photo-box-small mx-4 mt-4">
+    <img src="/images/placeholder.jpg" class="picture-size-small">
+  </div>
+<% } %>
 
       <br>
-      <div class="row mx-4 mt-4">
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="w-100"></div>
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-          <div class="col"><img src="/images/placeholder.jpg" alt="profile picture" class="rounded-circle" style="width: 50px"></div>
-      </div>
     </div>
+
+<!-- Show use info infor column -->
     <div class="col-6 silver rounded">
+
       <div class="row ml-2 mt-2">
         <h1 class="display-4">
           Welcome, <%= user.petname %>!
         </h1>
       </div>
+
       <hr/>
-      <div class="container">
-        <h2>My owner: <%= user.ownername %></h2>
-          <p class="l-height"><strong>About me: </strong> <%= user.bio %> </p>
-          <p class="l-height"><strong>I live in : </strong> <%= user.location %> </p>
-          <p class="l-height"><strong>I am a: </strong> <%= user.animaltype %> </p>
-          <p class="l-height"><strong>My breed: </strong> <%= user.breed %> </p>
-          <img src="/images/<%= user.sex%>.png" alt="gender">
+      <div class="container row">
+        <div class="col-9">
+          <h2>My owner: <%= user.ownername %></h2>
+            <p class="bio"> <% if(user.bio) { %>
+              "<%= user.bio %>"
+              <%  } else { %>
+                  "About me..."
+              <%  } %> </p>
+            <p class="l-height"><strong>I live in : </strong> <%= user.location %> </p>
+            <p class="l-height"><strong>I am a: </strong> <%= user.animaltype %> </p>
+            <p class="l-height"><strong>My breed: </strong> <%= user.breed %> </p>
+        </div>
+        <div class="col-3 background-icon">
+          <img src="/images/<%= user.sex%>-grey.png" alt="gender" class="gender-img">
+        </div>
       </div>
+      <hr/>
+
 
 <!-- Section for writing post -->
             <div class="container">
-              <div class="card my-4">
-                <h5 class="card-header">Leave a Comment:</h5>
-                <div class="card-body">
-                  <form action="/post/<%= user.id %>" method="post">
+
+              <div class="card mx-1 mb-3 p-2">
+                  <form action="/post/<%= user.id %>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                      <textarea class="form-control" rows="3" name="message"></textarea>
-                      
+                      <textarea class="form-control" rows="3" name="message" placeholder="Share your moments with <%= user.petname%>"></textarea>
+                      <button type="submit" class="btn btn-outline-success">Share</button>
+                      <label for="attachment" class="btn btn-outline-secondary mt-2" id="attachment-label"> Upload picture
+                        <input id="attachment" type="file" class="form-control-file" name="attach">
+                      </label>
+                      <label id="filename"></label>
                     </div>
-                    
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                   
-                       
-                        <div class="picture">
-                          <input type="file" name="upload-picture" src='/images/photo-camera-black.png'>
-                        </div>
-                     
                   </form>
-                </div>
               </div>
             </div>
+            <hr/>
+
+            <!-- <form action="/user/upload" method="post" enctype="multipart/form-data" id="pic-upload">
+              <div class="image-upload">
+                <label for="pic-select">
+                  <img src="/images/image-add-button.png" class="upload-icon"/>
+                </label>
+                <input id="pic-select" type="file" name="photo"/>
+              </div>
+            </form> -->
+
+
 
 <!-- Showing posts -->
             <div class="container">
               <% if(posts !== 'undefined') {
               posts.reverse().forEach((post) => { %>
-                <div class="card mx-1 px-2">
-                  <%= post.message %>
-                  <button type="like-btn" name="like">Like</button>
-                </div>
-                <small class="form-text text-muted ml-3" style="font-size: 10px;">
-                  <%= post.date %>
-                </small>
+
+                <!-- card with content -->
+                <div class="card mx-1 px-3">
+                      <div class="row">
+                      <!-- if picture show this -->
+                      <% if (typeof post.picture_id[0] !== 'undefined') { %>
+                        <div class="post-pictures m-3">
+                          <img src="<%= post.picture_id[0] %>" alt="" class="post-img">
+                        </div>
+
+                        <div class="msg-content col-8 my-2">
+                          <small class="form-text text-muted" style="font-size: 10px;">
+                            <%= post.date %>
+                          </small>
+                          <%= post.message %>
+                        </div>
+                      <% } else { %>
+                        <div class="msg-content-only col my-3">
+                          <small class="form-text text-muted" style="font-size: 10px;">
+                            <%= post.date %>
+                          </small>
+                          <%= post.message %>
+                        </div>
+                    <%  } %>
+
+                      <!-- else just text -->
+
+                    </div>
+
+                    <div class="edit-icons">
+                      <img src="/images/edit.png" alt="" class="edit-icon">
+                      <img src="/images/delete.png" alt="" class="edit-icon">
+                    </div>
+                  </div>
+
+
+
                 <br>
                 <% })
               } %>
             </div>
-        <hr/>
-    </div>
+          </div>
 
 <!-- Followers section -->
-    <div class="col border m-4 rounded">
-      <div class="h-100">
+    <div class="col border ml-2 rounded">
+      <div>
         <div class="row m-3">
           <h3 class="display-6">Following</h3>
         </div>
