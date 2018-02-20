@@ -3,6 +3,7 @@ const Attachment = require('../models/attachments.model');
 const moment = require('moment');
 const fs = require('fs');
 const upload = require('../config/config.dropbox');
+const findHashtags = require('find-hashtags');
 
 function posts (req, res, next) {
   Post.find({})
@@ -29,14 +30,62 @@ module.exports = {
   createPost
 }
 
+module.exports.viewPost = (req, res, next) => {
+  const id = req.params.id;
+    Post.findById(id)
+    .then((post) => {
+      console.log("hashhhh")
+      res.render('post', {
+        post
+    });
+  });
+
+}
+
+
+module.exports.show = (req, res, next) => {
+  const {id} = req.params;
+
+  User.findById(id)
+  .then((user) => {
+      Post.find({owner_id: id})
+      .then((posts) => {
+        Picture.find({owner_id: user._id})
+        .then((pictures) => {
+          res.render('profile/profile', {
+            user,
+            posts,
+            pictures,
+            moment: moment(posts.date).format('lll')
+          });
+      });
+  })
+  .catch(err => {
+    console.log(err);
+  });
+});
+};
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports.addPost = (req, res, next) => {
   const id = req.params.id;
+  const hashtags = findHashtags(req.body.message)
 
   if (typeof req.file === 'undefined') {
     const newPost = {
       owner_id: id,
       message: req.body.message,
+      hashtag: hashtags,
       date: moment().format('lll')
     };
 
@@ -63,6 +112,7 @@ module.exports.addPost = (req, res, next) => {
       const newPost = {
         picture_id: picture.pic_path,
         owner_id: req.session.passport.user,
+        hashtag: hashtags,
         message: req.body.message,
         date: moment().format('lll')
       };
