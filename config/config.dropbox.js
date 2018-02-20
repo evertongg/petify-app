@@ -2,7 +2,7 @@ require('isomorphic-fetch');
 const Dropbox = require('dropbox').Dropbox;
 const fs = require('fs');
 const dbx = new Dropbox({ accessToken: 'ThiQM0jxepwAAAAAAAAdelsVqcbWmrTIcQGNep95fRzB7IF9Nyk4ebx64uK-sp5F' });
-const Post = require('../app/post/post.model');
+const Post = require('../models/posts.model');
 
 module.exports.getUrl = (file, fileContent) => {
   const filenameSplit = file.originalname.split('.');
