@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
-const pictureSchema = new Schema({
-  owner_id: String,
+const attachmentSchema = new Schema({
+  post_id: String,
   name: String,
   pic_path: String,
   pic_name: String
@@ -10,5 +10,5 @@ const pictureSchema = new Schema({
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });
 
-const Picture = mongoose.model("Picture", pictureSchema);
-module.exports = Picture;
+const Attachment = mongoose.model("Attachment", attachmentSchema);
+module.exports = Attachment;
