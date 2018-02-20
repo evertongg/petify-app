@@ -19,6 +19,7 @@ const postSchema = new mongoose.Schema({
   date: {
     type: String
   },
+  hashtag: [String],
   likes: [String],
   picture_id: [String]
 });
