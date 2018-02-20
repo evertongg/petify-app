@@ -13,7 +13,7 @@ function posts (req, res, next) {
 
 function createPost (req, res, next) {
   fs.readFile(req.file.path, (err, fileContent) => {
-    upload.getUrl(req.file.filename, fileContent)
+    upload.getUrl(req.file, fileContent)
     .then(url => {
       const post = new Post({
         title: req.body.title,
@@ -29,7 +29,6 @@ module.exports = {
   posts,
   createPost
 }
-
 
 module.exports.addPost = (req, res, next) => {
   const id = req.params.id;
