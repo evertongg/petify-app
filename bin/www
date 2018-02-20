@@ -5,8 +5,11 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('petify-app:server')('dropbox:server');
+var debug = require('debug')('petify-app:server');
 var http = require('http');
+
+
+//('dropbox:server')
 
 /**
  * Get port from environment and store in Express.

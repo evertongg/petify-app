@@ -20,6 +20,7 @@
     "express-ejs-layouts": "^2.3.1",
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
+    "find-hashtags": "^1.0.1",
     "isomorphic-fetch": "^2.2.1",
     "method-override": "^2.3.10",
     "moment": "^2.20.1",
