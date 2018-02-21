@@ -97,20 +97,21 @@
                   </div>
               <%  } %>
               </div>
-              <div class="" style="border: 1px solid black;">
+              <div class="logo-flex-container like-box">
                 <!-- likes container -->
-                <div class="">
-                  <% if (!post.likes.includes(user._id)) { %>
-                    <div class="">
-                      <a href="/post/like/<%= post.id %>"><img src="/images/bone(3).png" class=""></a>
+                  <% if (post.likes.includes(user.id)) { %>
+                    <div class="like-logo-box mr-2 ">
+                      <a href="/post/like/<%= post.id %>"><img src="/images/bone(2).png" class="like-icon"></a>
+
                     </div>
                   <% } else { %>
-                    <div class="">
-                      <img src="/images/bone(2).png" class="">
+                    <div class="like-logo-box mr-2 ">
+                      <a href="/post/like/<%= post.id %>"><img src="/images/bone(4).png" class="like-icon"></a>
+
                     </div>
                   <% } %>
-                  <p>+ <%= post.likesNumber %></p>
-                </div>
+                  <p class="likes mr-2">Throw bone</p>
+                  <p class="likes">+ <%= post.likesNumber %></p>
               </div>
             </div>
           <br>

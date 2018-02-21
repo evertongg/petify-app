@@ -76,37 +76,6 @@ body {
   min-height: 75px;
 }
 
-.transform-box {
-  animation-name: pop;
-  animation-duration: 0.3s;
-}
-
-.like-logo {
-  width: 24px;
-  padding: 3px;
-}
-
-.logo-toggle,
-.logo-toggle-active {
-  position: absolute;
-}
-
-.hidden {
-  display: none;
-}
-
-/* The animation code */
-@keyframes pop {
-    0% {
-    bottom: 9px;
-    }
-    50% {
-    bottom: 14px;
-    }
-    100% {
-    bottom: 9px;
-    }
-}
 
 /* Styling the upload button */
 .image-upload > input
@@ -251,4 +220,30 @@ input[type="file"] {
 .search-link:hover {
   text-decoration: none;
   color: #1098F7;
+}
+
+/* Like styling */
+.like-logo-box {
+  display: inline-block;
+}
+
+.logo-flex-container {
+  border-radius:4px;
+  width: 150px;
+  height: 26px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+
+.likes {
+font-size: 75%;
+font-weight: bolder;
+color: #CECECE;
+}
+
+.like-icon {
+  width: 15px;
 }

@@ -61,30 +61,27 @@ module.exports.updatePost = (req, res, next) => {
 
   Post.findById(post.id)
   .then(post => {
-    console.log(post.likes.length);
     if (post.likes.length === 0) {
-      console.log('first like');
       post.likes.push(user.id);
       post.likesNumber += 1;
       post.save();
-      res.redirect(`/profile/${user.id}`);
+      res.redirect(`/profile/${post.owner_id}`);
     } else {
-      console.log('wtf');
       post.likes.forEach((like) => {
         if (user.id == like) {
-          post.likesNumber -= 1;
           for (var i = post.likes.length-1; i>=0; i--) {
               if (post.likes[i] == like) {
+                  post.likesNumber -= 1;
                   post.likes.splice(i, 1);
               };
           };
           post.save();
-          res.redirect(`/profile/${user.id}`);
+          res.redirect(`/profile/${post.owner_id}`);
         } else {
           post.likes.push(user.id);
           post.likesNumber += 1;
           post.save();
-          res.redirect(`/profile/${user.id}`);
+          res.redirect(`/profile/${post.owner_id}`);
         }
       });
     }
