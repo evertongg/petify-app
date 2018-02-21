@@ -20,6 +20,10 @@ const postSchema = new mongoose.Schema({
     type: String
   },
   likes: [String],
+  likesNumber: {
+    type: Number,
+    default: 0
+  },
   picture_id: [String]
 });
 

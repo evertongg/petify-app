@@ -82,7 +82,6 @@
                   <div class="post-pictures m-3">
                     <img src="<%= post.picture_id[0] %>" alt="" class="post-img">
                   </div>
-
                   <div class="msg-content col-8 my-2">
                     <small class="form-text text-muted" style="font-size: 10px;">
                       <%= post.date %>
@@ -97,6 +96,21 @@
                     <%= post.message %>
                   </div>
               <%  } %>
+              </div>
+              <div class="" style="border: 1px solid black;">
+                <!-- likes container -->
+                <div class="">
+                  <% if (!post.likes.includes(user._id)) { %>
+                    <div class="">
+                      <a href="/post/like/<%= post.id %>"><img src="/images/bone(3).png" class=""></a>
+                    </div>
+                  <% } else { %>
+                    <div class="">
+                      <img src="/images/bone(2).png" class="">
+                    </div>
+                  <% } %>
+                  <p>+ <%= post.likesNumber %></p>
+                </div>
               </div>
             </div>
           <br>

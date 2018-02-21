@@ -4,33 +4,6 @@ const moment = require('moment');
 const fs = require('fs');
 const upload = require('../config/config.dropbox');
 
-//Dropbox uploads
-// function posts (req, res, next) {
-//   Post.find({})
-//   .then(posts => res.render('index', {posts, title: 'dropbox-upload'}))
-//   .catch(err => next(err));
-// }
-//
-// function createPost (req, res, next) {
-//   fs.readFile(req.file.path, (err, fileContent) => {
-//     upload.getUrl(req.file.filename, fileContent)
-//     .then(url => {
-//       const post = new Post({
-//         title: req.body.title,
-//         imageUrl: `https://dl.dropboxusercontent.com/s${url}`
-//       })
-//       post.save()
-//       .then(() => res.redirect('/'))
-//     })
-//   })
-// }
-//
-// module.exports = {
-//   posts,
-//   createPost
-// };
-
-
 
 module.exports.addPost = (req, res, next) => {
   const id = req.params.id;
@@ -65,7 +38,7 @@ module.exports.addPost = (req, res, next) => {
       const newPost = {
         picture_id: picture.pic_path,
         owner_id: req.session.passport.user,
-        message: req.body.message,
+        message: req.body && req.body.message || '',
         date: moment().format('lll')
       };
 
@@ -82,21 +55,39 @@ module.exports.addPost = (req, res, next) => {
   };
 };
 
-// module.exports.updatePost = (req, res, next) => {
-//   const user = res.locals.user
-//   Post.findById(req.params.id)
-//   .then(post => {
-//     let like = false;
-//     post.likes.forEach(userId => {
-//       if (userId == user._id) {
-//         like = true
-//       }
-//     })
-//     if (!like) {
-//       post.likes.push(user._id)
-//       Post.findByIdAndUpdate(req.params.id, post, {new: true})
-//       .then(post => res.redirect(`/profile/${user._id}`))
-//       .catch(err => err)
-//     }
-//   })
-// }
+module.exports.updatePost = (req, res, next) => {
+  const user = res.locals.user;
+  const post = req.params;
+
+  Post.findById(post.id)
+  .then(post => {
+    console.log(post.likes.length);
+    if (post.likes.length === 0) {
+      console.log('first like');
+      post.likes.push(user.id);
+      post.likesNumber += 1;
+      post.save();
+      res.redirect(`/profile/${user.id}`);
+    } else {
+      console.log('wtf');
+      post.likes.forEach((like) => {
+        if (user.id == like) {
+          post.likesNumber -= 1;
+          for (var i = post.likes.length-1; i>=0; i--) {
+              if (post.likes[i] == like) {
+                  post.likes.splice(i, 1);
+              };
+          };
+          post.save();
+          res.redirect(`/profile/${user.id}`);
+        } else {
+          post.likes.push(user.id);
+          post.likesNumber += 1;
+          post.save();
+          res.redirect(`/profile/${user.id}`);
+        }
+      });
+    }
+  })
+  .catch((err) => console.log(err));
+};
