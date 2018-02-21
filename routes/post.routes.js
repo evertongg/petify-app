@@ -8,7 +8,7 @@ const upload = multer({dest: 'public/uploads/posts'});
 
 
 router.post('/:id', upload.single('attach'), postController.addPost);
-// router.get('/:id', postController.updatePost);
+router.get('/like/:id', postController.updatePost);
 // router.post('/', exist.existsUploadsFolder, upload.single('photo'), postController.createPost);
 
 // router.post('/upload', postController.addPic);

@@ -76,40 +76,23 @@ body {
   min-height: 75px;
 }
 
-.like-box {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  right: 7px;
-  bottom: 9px;
-}
-
 .transform-box {
   animation-name: pop;
   animation-duration: 0.3s;
 }
 
 .like-logo {
-  width: 22px;
+  width: 24px;
   padding: 3px;
 }
 
 .logo-toggle,
 .logo-toggle-active {
   position: absolute;
-  border-radius: 50px;
 }
 
 .hidden {
   display: none;
-}
-
-.black-b {
-  border: 1px solid black;
-}
-
-.yellow-b {
-  border: 1px solid #FADB60;
 }
 
 /* The animation code */
