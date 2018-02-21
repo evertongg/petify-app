@@ -97,22 +97,40 @@
                   </div>
               <%  } %>
               </div>
-              <div class="logo-flex-container like-box">
+              <div class="logo-flex-container like-box" id="update-like">
                 <!-- likes container -->
                   <% if (post.likes.includes(user.id)) { %>
-                    <div class="like-logo-box mr-2 ">
+                    <div class="like-logo-box mr-2 update">
                       <a href="/post/like/<%= post.id %>"><img src="/images/bone(2).png" class="like-icon"></a>
 
                     </div>
                   <% } else { %>
-                    <div class="like-logo-box mr-2 ">
+                    <div class="like-logo-box mr-2 update">
                       <a href="/post/like/<%= post.id %>"><img src="/images/bone(4).png" class="like-icon"></a>
 
                     </div>
                   <% } %>
                   <p class="likes mr-2">Throw bone</p>
                   <p class="likes">+ <%= post.likesNumber %></p>
+                  <div class="dropdown show ml-3">
+                  <a class="dropdown-toggle likes" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Leave a comment
+                  </a>
+                    <div class="dropdown-menu comments" aria-labelledby="dropdownMenuLink">
+                        <form class="" action="/post/comment/<%= post.id %>" method="post">
+                          <textarea class="form-control" rows="2" name="comment" placeholder="Leave a comment"></textarea>
+                          <button type="submit" class="btn btn-outline-dark">Post</button>
+                        </form>
+                    </div>
+                  </div>
               </div>
+              <% post.comments.forEach((post) => { %>
+                <div class="card mb-3 p-2">
+                  <small><%= post.date %>, is writing:</small>
+                  <p><strong><%= post.owner_name %></strong> <small> is writing: </small></p>
+                  <p><%= post.message %></p>
+                </div>
+           <% }) %>
             </div>
           <br>
           <% })

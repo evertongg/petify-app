@@ -24,7 +24,16 @@ const postSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  picture_id: [String]
+  picture_id: [String],
+  comments: [{
+    message: String,
+    owner_id: String,
+    owner_name: String,
+    date: {
+      type: Date,
+      default: Date.now
+    }
+  }]
 });
 
 const Post = mongoose.model('Post', postSchema);

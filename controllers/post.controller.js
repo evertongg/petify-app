@@ -88,3 +88,22 @@ module.exports.updatePost = (req, res, next) => {
   })
   .catch((err) => console.log(err));
 };
+
+module.exports.updateComment = (req, res, next) => {
+  const user = res.locals.user;
+  const post = req.params;
+
+  const newComment = {
+    message: req.body.comment,
+    owner_id: user.id,
+    owner_name: user.petname
+  };
+
+  Post.findById(post.id)
+  .then(post => {
+    post.comments.push(newComment);
+    post.save();
+    res.redirect(`/profile/${post.owner_id}`);
+  })
+  .catch((err) => console.log(err));
+};
