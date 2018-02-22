@@ -90,3 +90,53 @@ module.exports.savePic = (req, res) => {
     console.log(err);
   });
 };
+
+module.exports.follow = (req, res, next) => {
+  // Id of the user we want to follow
+  const {id} = req.params;
+  const sessionId = req.session.passport.user;
+
+// Find the user in the session = currentUser
+  User.findById(sessionId)
+  .then((currentUser) => {
+    // Find the user we want to follow = user
+    User.findById(id)
+    .then((user) => {
+      const newFollower = {
+          user_id: currentUser.id,
+          petname: currentUser.petname
+      };
+      // If the followersarray is empty do this
+      if (user.followers.length === 0) {
+        user.followers.push(newFollower);
+        user.followersNumber += 1;
+        user.save();
+        res.redirect(`/profile/${user.id}`);
+      }
+      else
+      {
+        // If the followersarray is not empty see if user is in there
+
+        user.followers.forEach((follower) => {
+          if (currentUser.id == follower.user_id) {
+            console.log(user.followers.length);
+            for (var i = user.followers.length-1; i>=0; i--) {
+                if (user.followers[i].user_id == currentUser.id) {
+                    user.followersNumber -= 1;
+                    user.followers.splice(i, 1);
+                };
+            };
+            user.save();
+            res.redirect(`/profile/${user.id}`);
+          } else {
+            user.followers.push(newFollower);
+            user.followersNumber += 1;
+            user.save();
+            res.redirect(`/profile/${user.id}`);
+            }
+          });
+        }
+    });
+  })
+  .catch((err) => console.log(err));
+};

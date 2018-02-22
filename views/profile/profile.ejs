@@ -30,7 +30,7 @@
       <br>
     </div>
 
-    <div class="col-6 silver rounded">
+    <div class="col-6 bg-light rounded">
       <div class="row ml-2 mt-2">
         <h1 class="display-4">
           Hi, I'm <%= user.petname %>!
@@ -125,10 +125,10 @@
                   </div>
               </div>
               <% post.comments.forEach((post) => { %>
-                <div class="card mb-3 p-2">
-                  <small><%= post.date %>, is writing:</small>
-                  <p><strong><%= post.owner_name %></strong> <small> is writing: </small></p>
-                  <p><%= post.message %></p>
+                <div class="card mb-3 p-2 lightblue">
+                  <small class="comment-date"><%= post.date %></small>
+                  <p class="comment-header"><strong><a href="/profile/<%= post.owner_id%>"><%= post.owner_name %></a></strong> <small> is writing: </small></p>
+                  <p class="comment-msg">"<%= post.message %>"</p>
                 </div>
            <% }) %>
             </div>
@@ -163,12 +163,24 @@
         <% } %>
       </div> -->
     </div>
-    <div class="col border ml-2 rounded">
-      <div class="h-100">
+
+    <div class="col ml-2">
+      <div class="border rounded mb-3 bg-light">
         <div class="row m-3">
-          <h3 class="display-6">Following</h3>
+          <form class="follow-form" action="/user/follow/<%= user.id %>" method="post">
+            <button type="submit" name="button" class="btn btn-primary follow-btn">Follow me</button>
+          </form>
+          <p class="mx-auto mt-2"><%= user.followersNumber %> Followers</p>
+
         </div>
       </div>
+      <div class="border rounded p-1 bg-white mh-100 h-25">
+        <div class="border-bottom">
+          <h5 class="display-6 mt-2 text-center">Find <%= user.petname %>'s friends</h5>
+          <p class='text-center small'><%= user.petname %> is following <%= user.followingNumber %> pets</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

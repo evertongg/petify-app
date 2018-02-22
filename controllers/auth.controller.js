@@ -7,8 +7,10 @@ require('../config/config.passport')(passport);
 // GET HOME page with login and signup modals.
 module.exports.show = (req, res) => {
   let errors;
+  const myId = res.session.passport.user;
 
     res.render('index', {
+      currentUser: myId,
       errors,
       petname: req.body.petname,
       ownername: req.body.ownername,

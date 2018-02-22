@@ -41,11 +41,18 @@ const userSchema = new mongoose.Schema({
     user_id: String,
     petname: String
     }],
-  followers_ids: [String],
+    followersNumber: {
+      type: Number,
+      default: 0
+    },
   following: [{
     user_id: String,
     petname: String
     }],
+  followingNumber: {
+    type: Number,
+    default: 0
+  },
   posts: [String],
   paws: Number,
   paw_ids: [String]
