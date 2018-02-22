@@ -39,15 +39,19 @@ const userSchema = new mongoose.Schema({
   skills: [String],
   followers: [{
     user_id: String,
-    petname: String
+    petname: String,
+    pic: String,
+    location: String
     }],
-    followersNumber: {
+  followersNumber: {
       type: Number,
       default: 0
     },
   following: [{
     user_id: String,
-    petname: String
+    petname: String,
+    pic: String,
+    location: String
     }],
   followingNumber: {
     type: Number,
