@@ -80,7 +80,7 @@
                   <form action="/post/<%= user.id %>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                       <textarea class="form-control" rows="3" name="message" placeholder="Share your moments with <%= user.petname%>"></textarea>
-                      <button type="submit" class="btn btn-outline-success">Share</button>
+                      <button type="submit" class="btn btn-outline-primary">Share</button>
                       <label for="attachment" class="btn btn-outline-secondary mt-2" id="attachment-label"> Upload picture
                         <input id="attachment" type="file" class="form-control-file" name="attach">
                       </label>
@@ -139,10 +139,18 @@
                       <img src="/images/edit.png" alt="" class="edit-icon">
                       <img src="/images/delete.png" alt="" class="edit-icon">
                     </div>
+
+                    <% post.comments.forEach((post) => { %>
+                      <div class="card mb-3 p-2 lightblue">
+                        <small class="comment-date"><%= post.date %></small>
+                        <p class="comment-header"><strong><a href="/profile/<%= post.owner_id%>"><%= post.owner_name %></a></strong> <small> is writing: </small></p>
+                        <p class="comment-msg"><%= post.message %></p>
+                        <div class="edit-icons-comment">
+                          <img src="/images/delete.png" alt="" class="edit-icon">
+                        </div>
+                      </div>
+                 <% }) %>
                   </div>
-
-
-
                 <br>
                 <% })
               } %>
@@ -150,10 +158,10 @@
           </div>
 
 <!-- Followers section -->
-    <div class="col border ml-2 rounded">
-      <div>
-        <div class="row m-3">
-          <h3 class="display-6">Following</h3>
+    <div class="col ml-2">
+      <div class="border rounded p-1 bg-white mh-100 h-50">
+        <div class="border-bottom m-2">
+          <h3 class="display-6">Pets I'm following</h3>
         </div>
       </div>
     </div>

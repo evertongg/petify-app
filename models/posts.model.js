@@ -30,7 +30,7 @@ const postSchema = new mongoose.Schema({
     owner_id: String,
     owner_name: String,
     date: {
-      type: Date,
+      type: String,
       default: Date.now
     }
   }]

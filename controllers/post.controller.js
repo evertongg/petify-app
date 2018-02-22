@@ -96,7 +96,8 @@ module.exports.updateComment = (req, res, next) => {
   const newComment = {
     message: req.body.comment,
     owner_id: user.id,
-    owner_name: user.petname
+    owner_name: user.petname,
+    date: moment().format('lll')
   };
 
   Post.findById(post.id)
