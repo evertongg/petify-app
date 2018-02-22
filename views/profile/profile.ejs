@@ -174,11 +174,23 @@
 
         </div>
       </div>
-      <div class="border rounded p-1 bg-white mh-100 h-25">
+      <div class="border rounded p-1 bg-white mh-100 h-100">
         <div class="border-bottom">
           <h5 class="display-6 mt-2 text-center">Find <%= user.petname %>'s friends</h5>
           <p class='text-center small'><%= user.petname %> is following <%= user.followingNumber %> pets</p>
         </div>
+
+
+        <% user.followers.forEach((follower) => { %>
+          <div class="d-flex flex-row d-flex justify-content-start align-items-center">
+            <div class="photo-box-xsmall m-2 ">
+              <img src="/<%= follower.pic %>" alt="" class="picture-size-xsmall"/>
+            </div>
+            <div class="mt-3">
+              <p class=""> <a href="/profile/<%= follower.user_id %>"><%= follower.petname %></a>, <small><%= follower.location %></small></p>
+            </div>
+          </div>
+      <% }) %>
       </div>
 
     </div>

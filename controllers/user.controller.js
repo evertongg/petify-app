@@ -104,12 +104,24 @@ module.exports.follow = (req, res, next) => {
     .then((user) => {
       const newFollower = {
           user_id: currentUser.id,
-          petname: currentUser.petname
+          petname: currentUser.petname,
+          pic: currentUser.pictures,
+          location: currentUser.location
+      };
+
+      const newFollowing = {
+          user_id: user.id,
+          petname: user.petname,
+          pic: user.pictures,
+          location: user.location
       };
       // If the followersarray is empty do this
       if (user.followers.length === 0) {
         user.followers.push(newFollower);
+        currentUser.following.push(newFollowing);
         user.followersNumber += 1;
+        currentUser.followingNumber += 1;
+        currentUser.save();
         user.save();
         res.redirect(`/profile/${user.id}`);
       }
@@ -119,18 +131,29 @@ module.exports.follow = (req, res, next) => {
 
         user.followers.forEach((follower) => {
           if (currentUser.id == follower.user_id) {
-            console.log(user.followers.length);
             for (var i = user.followers.length-1; i>=0; i--) {
                 if (user.followers[i].user_id == currentUser.id) {
                     user.followersNumber -= 1;
                     user.followers.splice(i, 1);
                 };
             };
+
+            for (var i = currentUser.following.length-1; i>=0; i--) {
+                if (currentUser.following[i].user_id == user.id) {
+                    currentUser.followingNumber -= 1;
+                    currentUser.following.splice(i, 1);
+                };
+            };
+
+            currentUser.save();
             user.save();
             res.redirect(`/profile/${user.id}`);
           } else {
             user.followers.push(newFollower);
+            currentUser.following.push(newFollowing);
             user.followersNumber += 1;
+            currentUser.followingNumber += 1;
+            currentUser.save();
             user.save();
             res.redirect(`/profile/${user.id}`);
             }
