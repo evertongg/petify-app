@@ -8,6 +8,10 @@ const upload = multer({dest: 'public/uploads/posts'});
 
 
 router.post('/:id', upload.single('attach'), postController.addPost);
-router.get('/:id', postController.viewPost)
+router.get('/like/:id', postController.updatePost);
+router.post('/comment/:id', postController.updateComment);
+
+// router.post('/upload', postController.addPic);
+
 
 module.exports = router;

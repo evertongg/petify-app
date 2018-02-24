@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
 
+
 const userSchema = new mongoose.Schema({
   petname: {
     type: String,
@@ -20,9 +21,10 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   location: {
-    type: String,
-    required: true
+     lat: Number,
+     lng: Number,
   },
+  city: String,
   animaltype: {
     type: String,
     required: true
@@ -39,21 +41,42 @@ const userSchema = new mongoose.Schema({
   skills: [String],
   followers: [{
     user_id: String,
-    petname: String
+    petname: String,
+    pic: String,
+    city: String,
+    location: {
+       lat: Number,
+       lng: Number,
+    }
     }],
-  followers_ids: [String],
+  followersNumber: {
+      type: Number,
+      default: 0
+    },
   following: [{
     user_id: String,
-    petname: String
+    petname: String,
+    pic: String,
+    city: String,
+    location: {
+       lat: Number,
+       lng: Number,
+    }
     }],
+  followingNumber: {
+    type: Number,
+    default: 0
+  },
   posts: [String],
   paws: Number,
   paw_ids: [String]
 });
 
+
 // Encrypting password
 userSchema.pre('save', function (next) {
   const user = this;
+
   if (!user.isModified('password')) {
     return next();
   }

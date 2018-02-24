@@ -44,7 +44,9 @@ module.exports.saveChanges = (req, res, next) => {
     user.petname = req.body.petname,
     user.ownername = req.body.ownername,
     user.bio = req.body.bio,
-    user.location = req.body.location,
+    user.city = req.body.location,
+    user.location.lat = req.body.lat,
+    user.location.lng = req.body.lng,
     user.animaltype = req.body.animaltype,
     user.breed = req.body.breed,
     user.birthdate = moment(req.body.birthdate).format('LL'),
@@ -82,11 +84,89 @@ module.exports.savePic = (req, res) => {
       .then(user => {
         res.redirect('/user');
       });
-
-
     });
   })
   .catch((err) => {
     console.log(err);
   });
+};
+
+module.exports.follow = (req, res, next) => {
+  // Id of the user we want to follow
+  const {id} = req.params;
+  const sessionId = req.session.passport.user;
+
+// Find the user in the session = currentUser
+  User.findById(sessionId)
+  .then((currentUser) => {
+    // Find the user we want to follow = user
+    User.findById(id)
+    .then((user) => {
+      const newFollower = {
+          user_id: currentUser.id,
+          petname: currentUser.petname,
+          pic: currentUser.pictures,
+          location: {
+          lat: currentUser.location.lat,
+          lng: currentUser.location.lng
+          },
+          city: currentUser.city
+      };
+
+      const newFollowing = {
+          user_id: user.id,
+          petname: user.petname,
+          pic: user.pictures,
+          location: {
+          lat: user.location.lat,
+          lng: user.location.lng
+          },
+          city: user.city
+      };
+      // If the followersarray is empty do this
+      if (user.followers.length === 0) {
+        user.followers.push(newFollower);
+        currentUser.following.push(newFollowing);
+        user.followersNumber += 1;
+        currentUser.followingNumber += 1;
+        currentUser.save();
+        user.save();
+        res.redirect(`/profile/${user.id}`);
+      }
+      else
+      {
+        // If the followersarray is not empty see if user is in there
+        user.followers.forEach((follower) => {
+          if (currentUser.id == follower.user_id) {
+            for (var i = user.followers.length-1; i>=0; i--) {
+                if (user.followers[i].user_id == currentUser.id) {
+                    user.followersNumber -= 1;
+                    user.followers.splice(i, 1);
+                };
+            };
+
+            for (var i = currentUser.following.length-1; i>=0; i--) {
+                if (currentUser.following[i].user_id == user.id) {
+                    currentUser.followingNumber -= 1;
+                    currentUser.following.splice(i, 1);
+                };
+            };
+
+            currentUser.save();
+            user.save();
+            res.redirect(`/profile/${user.id}`);
+          } else {
+            user.followers.push(newFollower);
+            currentUser.following.push(newFollowing);
+            user.followersNumber += 1;
+            currentUser.followingNumber += 1;
+            currentUser.save();
+            user.save();
+            res.redirect(`/profile/${user.id}`);
+            }
+          });
+        }
+    });
+  })
+  .catch((err) => console.log(err));
 };

@@ -5,7 +5,9 @@ const Post = require('../models/posts.model');
 module.exports.showResults = (req, res, next) => {
 const search = req.body.search;
 
-  User.find({'petname' : search})
+  User.find({'petname' : {
+    $regex: new RegExp('^' + search.toLowerCase(), 'i')}
+  })
   .then((pets) => {
     Post.find({'hashtag' : search})
     .then((posts) => {
@@ -15,6 +17,7 @@ const search = req.body.search;
         results: [...posts, ...pets]
       });
     })
+
   })
   .catch((err) => {
     console.log(err);
