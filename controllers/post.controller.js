@@ -67,16 +67,6 @@ module.exports.show = (req, res, next) => {
 };
 
 
-
-
-
-
-
-
-
-
-
-
 module.exports.addPost = (req, res, next) => {
   const id = req.params.id;
   const hashtags = findHashtags(req.body.message)
@@ -112,8 +102,9 @@ module.exports.addPost = (req, res, next) => {
       const newPost = {
         picture_id: picture.pic_path,
         owner_id: req.session.passport.user,
-        hashtag: hashtags,
-        message: req.body.message,
+
+        message: req.body && req.body.message || '',
+
         date: moment().format('lll')
       };
 
@@ -130,21 +121,56 @@ module.exports.addPost = (req, res, next) => {
   };
 };
 
-// module.exports.updatePost = (req, res, next) => {
-//   const user = res.locals.user
-//   Post.findById(req.params.id)
-//   .then(post => {
-//     let like = false;
-//     post.likes.forEach(userId => {
-//       if (userId == user._id) {
-//         like = true
-//       }
-//     })
-//     if (!like) {
-//       post.likes.push(user._id)
-//       Post.findByIdAndUpdate(req.params.id, post, {new: true})
-//       .then(post => res.redirect(`/profile/${user._id}`))
-//       .catch(err => err)
-//     }
-//   })
-// }
+module.exports.updatePost = (req, res, next) => {
+  const user = res.locals.user;
+  const post = req.params;
+
+  Post.findById(post.id)
+  .then(post => {
+    if (post.likes.length === 0) {
+      post.likes.push(user.id);
+      post.likesNumber += 1;
+      post.save();
+      res.redirect(`/profile/${post.owner_id}`);
+    } else {
+      post.likes.forEach((like) => {
+        if (user.id == like) {
+          for (var i = post.likes.length-1; i>=0; i--) {
+              if (post.likes[i] == like) {
+                  post.likesNumber -= 1;
+                  post.likes.splice(i, 1);
+              };
+          };
+          post.save();
+          res.redirect(`/profile/${post.owner_id}`);
+        } else {
+          post.likes.push(user.id);
+          post.likesNumber += 1;
+          post.save();
+          res.redirect(`/profile/${post.owner_id}`);
+        }
+      });
+    }
+  })
+  .catch((err) => console.log(err));
+};
+
+module.exports.updateComment = (req, res, next) => {
+  const user = res.locals.user;
+  const post = req.params;
+
+  const newComment = {
+    message: req.body.comment,
+    owner_id: user.id,
+    owner_name: user.petname,
+    date: moment().format('lll')
+  };
+
+  Post.findById(post.id)
+  .then(post => {
+    post.comments.push(newComment);
+    post.save();
+    res.redirect(`/profile/${post.owner_id}`);
+  })
+  .catch((err) => console.log(err));
+};

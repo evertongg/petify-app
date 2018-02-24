@@ -21,7 +21,20 @@ const postSchema = new mongoose.Schema({
   },
   hashtag: [String],
   likes: [String],
-  picture_id: [String]
+  likesNumber: {
+    type: Number,
+    default: 0
+  },
+  picture_id: [String],
+  comments: [{
+    message: String,
+    owner_id: String,
+    owner_name: String,
+    date: {
+      type: String,
+      default: Date.now
+    }
+  }]
 });
 
 const Post = mongoose.model('Post', postSchema);
