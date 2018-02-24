@@ -13,4 +13,5 @@ router.post('/comment/:id', postController.updateComment);
 
 // router.post('/upload', postController.addPic);
 
+
 module.exports = router;
