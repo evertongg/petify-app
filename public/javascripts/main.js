@@ -200,7 +200,7 @@ $(document).ready(function(){
       let me = '/images/marker-sb.png';
       let followerMark = '/images/marker-s.png';
 
-      let myMarker = new google.maps.Marker({
+      let myPos = new google.maps.Marker({
               position: user,
               map: map,
               title: "I'm here",
@@ -212,13 +212,16 @@ $(document).ready(function(){
             lat: follower.location.lat,
             lng: follower.location.lng
           };
-        let myMarker = new google.maps.Marker({
+        let marker = new google.maps.Marker({
             position: position,
             map: map,
-            title: 'Follower',
-            icon: followerMark
+            title: follower.petname,
+            icon: followerMark,
+            url: `/profile/${follower.user_id}`
             });
-
+        google.maps.event.addListener(marker, 'click', function() {
+           window.location.href = this.url;
+       });
       })
 
   };
