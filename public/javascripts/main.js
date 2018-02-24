@@ -15,3 +15,12 @@ document.getElementById('attachment').onchange = function () {
 
     document.getElementById('filename').innerHTML = filename;
 };
+
+function showMap() {
+    var box = document.getElementById("map-box");
+    if (box.style.display === "none") {
+        box.style.display = "block";
+    } else {
+        box.style.display = "none";
+    }
+}
