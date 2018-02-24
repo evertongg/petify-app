@@ -106,14 +106,22 @@ module.exports.follow = (req, res, next) => {
           user_id: currentUser.id,
           petname: currentUser.petname,
           pic: currentUser.pictures,
-          location: currentUser.location
+          location: {
+          lat: currentUser.location.lat,
+          lng: currentUser.location.lng
+          },
+          city: currentUser.city
       };
 
       const newFollowing = {
           user_id: user.id,
           petname: user.petname,
           pic: user.pictures,
-          location: user.location
+          location: {
+          lat: user.location.lat,
+          lng: user.location.lng
+          },
+          city: user.city
       };
       // If the followersarray is empty do this
       if (user.followers.length === 0) {

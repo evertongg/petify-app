@@ -43,7 +43,11 @@ const userSchema = new mongoose.Schema({
     user_id: String,
     petname: String,
     pic: String,
-    location: String
+    city: String,
+    location: {
+       lat: Number,
+       lng: Number,
+    }
     }],
   followersNumber: {
       type: Number,
@@ -53,7 +57,11 @@ const userSchema = new mongoose.Schema({
     user_id: String,
     petname: String,
     pic: String,
-    location: String
+    city: String,
+    location: {
+       lat: Number,
+       lng: Number,
+    }
     }],
   followingNumber: {
     type: Number,
