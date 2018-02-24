@@ -82,8 +82,6 @@ module.exports.savePic = (req, res) => {
       .then(user => {
         res.redirect('/user');
       });
-
-
     });
   })
   .catch((err) => {
@@ -128,7 +126,6 @@ module.exports.follow = (req, res, next) => {
       else
       {
         // If the followersarray is not empty see if user is in there
-
         user.followers.forEach((follower) => {
           if (currentUser.id == follower.user_id) {
             for (var i = user.followers.length-1; i>=0; i--) {
