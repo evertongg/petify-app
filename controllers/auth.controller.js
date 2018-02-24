@@ -13,7 +13,6 @@ module.exports.show = (req, res) => {
       petname: req.body.petname,
       ownername: req.body.ownername,
       email: req.body.email,
-      location: req.body.location,
     });
 };
 
@@ -63,25 +62,24 @@ module.exports.doSignup = (req, res, next) => {
       petname,
       ownername,
       email,
-      location,
+      location
     });
 
   } else {
-
     //Check if user is already in DB
     User.findOne({
         email: req.body.email
       })
       .then(user => {
         if (!user) {
+
           const {
             petname,
             ownername,
             email,
             password,
-            location,
             animaltype,
-            sex
+            sex,
           } = req.body;
 
           const newUser = {
@@ -89,9 +87,13 @@ module.exports.doSignup = (req, res, next) => {
             ownername,
             email,
             password,
-            location,
             animaltype,
-            sex
+            sex,
+            city: req.body.location,
+            location: {
+              lat: req.body.lat,
+              lng: req.body.lng
+            }
           };
 
           user = new User(newUser);

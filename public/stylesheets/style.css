@@ -307,3 +307,21 @@ a .like:hover {
 .follow-form {
   width: 100%;
 }
+
+div.pac-container { z-index: 1051 !important; }
+
+.comment-area {
+    border: none;
+    background-color: transparent;
+    resize: none;
+    outline: none;
+
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none;
+    box-shadow: none !important;
+}
+
+#map {
+  width: 100%;
+  height: 270px;
+}
