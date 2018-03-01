@@ -2,6 +2,7 @@ const User = require('../models/user.model');
 const Post = require('../models/posts.model');
 const Picture = require('../models/picture.model');
 const moment = require('moment');
+const geolocation = require('geolocation');
 
 module.exports.show = (req, res) => {
   const {_id} = res.locals.user;
@@ -169,4 +170,45 @@ module.exports.follow = (req, res, next) => {
     });
   })
   .catch((err) => console.log(err));
+};
+
+module.exports.checkIn = (req, res, next) => {
+ const {_id} = res.locals.user;
+ // Find user
+ User.findById(_id)
+ .then(user => {
+   //new value
+   user.location.currentLocation.lat = req.body.locationLat;
+   user.location.currentLocation.lng = req.body.locationLng;
+
+   //save edited idea
+   user.save()
+   .then(user => {
+     if (user.location.currentLocation.lat == null) {
+       req.flash('error_msg', 'Location not found!');
+       res.redirect('/user');
+     } else {
+       req.flash('success_msg', 'Successfully checked in!');
+       res.redirect('/user');
+     }
+   });
+ });
+};
+
+module.exports.checkOut = (req, res, next) => {
+ const {_id} = res.locals.user;
+ // Find user
+ User.findById(_id)
+ .then(user => {
+   //new value
+   user.location.currentLocation.lat = null;
+   user.location.currentLocation.lng = null;
+
+   //save edited idea
+   user.save()
+   .then(user => {
+     req.flash('success_msg', 'Successfully checked out!');
+     res.redirect('/user');
+   });
+ });
 };
