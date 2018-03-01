@@ -21,6 +21,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
     "find-hashtags": "^1.0.1",
+    "geolocation": "^0.2.0",
     "isomorphic-fetch": "^2.2.1",
     "method-override": "^2.3.10",
     "moment": "^2.20.1",
@@ -31,6 +32,7 @@
     "nodemon": "^1.14.12",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "socket.io": "^2.0.4"
   }
 }
