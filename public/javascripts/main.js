@@ -16,23 +16,13 @@ document.getElementById('attachment').onchange = function () {
     document.getElementById('filename').innerHTML = filename;
 };
 
-function showMap() {
-    var box = document.getElementById("map-box");
-    if (box.style.display === "none") {
-
-        box.style.display = "block";
-    } else {
-        box.style.display = "none";
-    }
-}
 
 
 $(document).ready(function(){
-
-  function initialize() {
+  function initialize(location, currentLocation) {
       let myOptions = {
           zoom: 11,
-          center: user,
+          center: location,
           styles: [
         {
           "elementType": "geometry",
@@ -195,35 +185,57 @@ $(document).ready(function(){
       ]
       };
 
-      let map = new google.maps.Map(document.getElementById('map'),
-              myOptions);
-      let me = '/images/marker-sb.png';
-      let followerMark = '/images/marker-s.png';
 
-      let myPos = new google.maps.Marker({
-              position: user,
-              map: map,
-              title: "I'm here",
-              icon: me
-              });
 
-      followers.forEach((follower) => {
-        let position = {
-            lat: follower.location.lat,
-            lng: follower.location.lng
-          };
-        let marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            title: follower.petname,
-            icon: followerMark,
-            url: `/profile/${follower.user_id}`
-            });
-        google.maps.event.addListener(marker, 'click', function() {
-           window.location.href = this.url;
-       });
-      })
+      let blueMarker = '/images/marker-sb.png';
+      let blackMarker = '/images/marker-s.png';
+      let redMarker = '/images/marker-xsr.png';
 
+  let map = new google.maps.Map(document.getElementById('map'),
+          myOptions);
+  let myPos = new google.maps.Marker({
+          position: location,
+          map: map,
+          title: "I'm here",
+          icon: blueMarker
+          });
+  let myCurrentPos = new google.maps.Marker({
+          position: currentLocation,
+          map: map,
+          title: "My current position",
+          icon: redMarker
+          });
+
+  followers.forEach((follower) => {
+    let position = {
+        lat: follower.location.lat,
+        lng: follower.location.lng
+      };
+    let currentPosition = {
+        lat: follower.location.currentLocation.lat,
+        lng: follower.location.currentLocation.lng
+        };
+
+    let marker = new google.maps.Marker({
+        position: position,
+        map: map,
+        title: follower.petname,
+        icon: blackMarker,
+        url: `/profile/${follower.user_id}`
+        });
+    let currentMarker = new google.maps.Marker({
+        position: currentPosition,
+        map: map,
+        title: follower.petname,
+        icon: redMarker,
+        url: `/profile/${follower.user_id}`
+        });
+    google.maps.event.addListener(marker, currentMarker, 'click', function() {
+        window.location.href = this.url;
+    });
+  });
   };
-  google.maps.event.addDomListener(window, "load", initialize);
+  google.maps.event.addDomListener(window, 'load', initialize(user, user.currentLocation));
 });
+
+// Chat functionalities

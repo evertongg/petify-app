@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
   location: {
      lat: Number,
      lng: Number,
+     currentLocation: {
+       lat: Number,
+       lng: Number,
+     }
   },
   city: String,
   animaltype: {
