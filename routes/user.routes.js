@@ -9,7 +9,8 @@ router.get('/', secure.isAuthenticated, userController.show);
 router.get('/edit', secure.isAuthenticated, userController.edit);
 router.put('/edit', secure.isAuthenticated, userController.saveChanges);
 router.post('/follow/:id', secure.isAuthenticated, userController.follow);
-
+router.post('/checkin', secure.isAuthenticated, userController.checkIn);
+router.post('/checkout', secure.isAuthenticated, userController.checkOut);
 router.post('/upload', upload.single('photo'), userController.savePic);
 
 module.exports = router;

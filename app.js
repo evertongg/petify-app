@@ -13,6 +13,7 @@ const expressLayout = require('express-ejs-layouts');
 const passport = require('passport');
 const multer = require('multer');
 const upload = multer({dest: './public/uploads/'});
+const geolocation = require('geolocation');
 
 const auth = require('./routes/auth.routes');
 const user = require('./routes/user.routes');
@@ -21,6 +22,7 @@ const search = require('./routes/search.routes');
 const post = require('./routes/post.routes');
 
 const app = express();
+
 
 // Require DATABASE
 require('./config/config.db.js');
@@ -92,6 +94,9 @@ app.get('*', function(req, res, next){
   res.render('error');
 });
 
+app.get('/', function(req, res){
+  res.sendfile(__dirname + '/')
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

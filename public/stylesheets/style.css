@@ -321,11 +321,15 @@ div.pac-container { z-index: 1051 !important; }
     box-shadow: none !important;
 }
 
-#map {
+#map, #profile-map {
   width: 100%;
   height: 270px;
 }
 
 .follower-info {
   line-height: 12px;
+}
+
+#chat {
+  height: 100px;
 }
