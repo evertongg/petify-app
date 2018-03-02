@@ -25,7 +25,7 @@ const postSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  picture_id: [String],
+  picture_url: String,
   comments: [{
     message: String,
     owner_id: String,
