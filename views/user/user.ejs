@@ -27,11 +27,11 @@
 
 <!-- Shows map and sends variables to server -->
 <% var userLocation = user.location;
-   var following = user.following;
+   var followers = user.followers;
    var profile = false;%>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz3vQWI8lOLTCS2Ig-ctK8dkj5Zz58_Ic"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfSNmPaWF6hBGBRrI7lrsJ1Pd7fXPREBw"></script>
 <script type="text/javascript">
-  let followers = <%- JSON.stringify(following) %>;
+  let followers = <%- JSON.stringify(followers) %>;
   let user = <%- JSON.stringify(userLocation) %>;
   let profile = <%- JSON.stringify(profile) %>;
 </script>
@@ -40,26 +40,26 @@
 
 <!-- Gets navigator location and add value to hidden input -->
 <script type="text/javascript">
-if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var pos = { lat: position.coords.latitude, lng: position.coords.longitude };
-          document.getElementById('locationLat').value = pos.lat
-          document.getElementById('locationLng').value = pos.lng
-        });
-      } else {
-      alert('Location not found');
-      };
+  if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = { lat: position.coords.latitude, lng: position.coords.longitude };
+            document.getElementById('locationLat').value = pos.lat
+            document.getElementById('locationLng').value = pos.lng
+          });
+        } else {
+        alert('Location not found');
+        };
 </script>
 
 <!-- Check in and out buttons -->
 <div class="check-in row mx-auto">
-  <form class="" action="/user/checkin" method="post">
+  <form action="/user/checkin" method="post" style="width: 100%;">
     <input id="locationLat" name="locationLat" type="hidden" value=""></input>
     <input id="locationLng" name="locationLng" type="hidden" value=""></input>
-    <button type="submit" name="button" class="btn btn-outline-primary">Check In</button>
+    <button type="submit" name="button" class="btn btn-outline-primary btn-block mt-1">Check In</button>
   </form>
-  <form class="" action="/user/checkout" method="post">
-    <button type="submit" name="button" class="btn btn-outline-danger">Check Out</button>
+  <form action="/user/checkout" method="post" style="width: 100%;">
+    <button type="submit" name="button" class="btn btn-outline-danger btn-block mt-1">Check Out</button>
   </form>
 </div>
 
