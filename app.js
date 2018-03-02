@@ -15,6 +15,7 @@ const passport = require('passport');
 const multer = require('multer');
 const upload = multer({dest: './public/uploads/'});
 const geolocation = require('geolocation');
+const cloudinary = require('cloudinary');
 
 const auth = require('./routes/auth.routes');
 const user = require('./routes/user.routes');
@@ -30,6 +31,15 @@ require('./config/config.db.js');
 
 // Require PASSPORT
 require('./config/config.passport')(passport);
+
+// cloudinary config
+cloudinary.config({
+  cloud_name: 'hnpwjn2lp',
+  api_key: '176622653116796',
+  api_secret: '5E0J0auTQ5dbzptEfSGCcSF92YQ'
+});
+
+
 
 // view engine setup
 app.set('view engine', 'ejs');

@@ -196,7 +196,7 @@ $(document).ready(function(){
   let myPos = new google.maps.Marker({
           position: location,
           map: map,
-          title: "I'm here",
+          title: "I live here",
           icon: blueMarker
           });
 
@@ -207,39 +207,39 @@ $(document).ready(function(){
           icon: redMarker
           });
 
-  followers.forEach((follower) => {
-    let position = {
-        lat: follower.location.lat,
-        lng: follower.location.lng
-      };
-    let currentPosition = {
-        lat: follower.location.currentLocation.lat,
-        lng: follower.location.currentLocation.lng
-        };
 
-    let marker = new google.maps.Marker({
-        position: position,
-        map: map,
-        title: follower.petname,
-        icon: blackMarker,
-        url: `/profile/${follower.user_id}`
-        });
+      followers.forEach((follower) => {
+        let position = {
+            lat: follower.location.lat,
+            lng: follower.location.lng
+          };
+        let currentPosition = {
+            lat: follower.location.currentLocation.lat,
+            lng: follower.location.currentLocation.lng
+            };
 
-    let currentMarker = new google.maps.Marker({
-        position: currentPosition,
-        map: map,
-        title: follower.petname,
-        icon: redMarker,
-        url: `/profile/${follower.user_id}`
+        let marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: follower.petname,
+            icon: blackMarker,
+            url: `/profile/${follower.user_id}`
+            });
+
+        let currentMarker = new google.maps.Marker({
+            position: currentPosition,
+            map: map,
+            title: follower.petname,
+            icon: redMarker,
+            url: `/profile/${follower.user_id}`
+            });
+        google.maps.event.addListener(marker, 'click', function() {
+            window.location.href = this.url;
         });
-        
-    google.maps.event.addListener(marker, 'click', function() {
-        window.location.href = this.url;
-    });
-    google.maps.event.addListener(currentMarker, 'click', function() {
-        window.location.href = this.url;
-    });
-  });
+        google.maps.event.addListener(currentMarker, 'click', function() {
+            window.location.href = this.url;
+        });
+      });
   };
   google.maps.event.addDomListener(window, 'load', initialize(user, user.currentLocation));
 });

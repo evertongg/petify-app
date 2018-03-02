@@ -4,6 +4,7 @@ const moment = require('moment');
 const fs = require('fs');
 const upload = require('../config/config.dropbox');
 const findHashtags = require('find-hashtags');
+const cloudinary = require('cloudinary');
 
 // NOT DEPLOYED AT THE MOMENT
 function posts (req, res, next) {
@@ -71,7 +72,7 @@ module.exports.show = (req, res, next) => {
 // ADDING A NEW POST in the user profile
 module.exports.addPost = (req, res, next) => {
   const id = req.params.id;
-  const hashtags = findHashtags(req.body.message)
+  const hashtags = findHashtags(req.body.message);
 
   if (typeof req.file === 'undefined') {
     const newPost = {
@@ -91,34 +92,41 @@ module.exports.addPost = (req, res, next) => {
       console.log(err);
     });
   } else {
-    const newAtt = {
-      owner_id: id,
-      pic_path: `../../uploads/posts/${req.file.filename}`,
-      pic_name: req.file.originalname
-    };
 
-    attachment = new Attachment(newAtt);
+    cloudinary.config({
+      cloud_name: process.env.CLOUD_NAME,
+      api_key: process.env.CLOUD_API,
+      api_secret: process.env.CLOUD_SECRET
+    });
 
-    attachment.save()
-    .then((picture) => {
-      const newPost = {
-        picture_id: picture.pic_path,
-        owner_id: req.session.passport.user,
-
-        message: req.body && req.body.message || '',
-
-        date: moment().format('lll')
+    cloudinary.uploader.upload(req.file.path, function(result) {
+      const newAtt = {
+        owner_id: id,
+        url: result.url,
+        pic_name: req.file.originalname
       };
 
-      post = new Post(newPost);
+      attachment = new Attachment(newAtt);
 
-      post.save()
-      .then(() => {
-        console.log('saving post WITH image');
-        res.redirect('/user');
+      attachment.save()
+      .then((picture) => {
+        const newPost = {
+          picture_url: picture.url,
+          owner_id: req.session.passport.user,
+          message: req.body && req.body.message || '',
+          date: moment().format('lll')
+        };
+
+        post = new Post(newPost);
+
+        post.save()
+        .then(() => {
+          console.log('saving post WITH image');
+          res.redirect('/user');
+        });
+      }).catch((err) => {
+        console.log(err);
       });
-    }).catch((err) => {
-      console.log(err);
     });
   };
 };
