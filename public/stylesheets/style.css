@@ -28,6 +28,10 @@ body {
   line-height: 14px;
 }
 
+.location {
+  line-height: 14px;
+}
+
 .start-logo {
   width: 150px;
   margin: 0 auto;
