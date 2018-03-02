@@ -1,7 +1,10 @@
+// NOT DEPLOYED AT THE MOMENT
+
 require('isomorphic-fetch');
 const Dropbox = require('dropbox').Dropbox;
 const fs = require('fs');
-const dbx = new Dropbox({ accessToken: 'ThiQM0jxepwAAAAAAAAdelsVqcbWmrTIcQGNep95fRzB7IF9Nyk4ebx64uK-sp5F' });
+const accessToken = process.env.DROPBOX
+const dbx = new Dropbox({ accessToken: accessToken });
 const Post = require('../models/posts.model');
 
 module.exports.getUrl = (file, fileContent) => {

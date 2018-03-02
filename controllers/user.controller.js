@@ -4,6 +4,7 @@ const Picture = require('../models/picture.model');
 const moment = require('moment');
 const geolocation = require('geolocation');
 
+// SHOW HOMEPAGE after logging in
 module.exports.show = (req, res) => {
   const {_id} = res.locals.user;
 
@@ -35,7 +36,7 @@ module.exports.addPost = (req, res, next) => {
   res.send('sending post');
 };
 
-// edit from process
+// EDIT PROFILE and save changes in Mongoose
 module.exports.saveChanges = (req, res, next) => {
   const {_id} = res.locals.user;
 // Find user
@@ -65,7 +66,7 @@ module.exports.saveChanges = (req, res, next) => {
 };
 
 
-
+// ADD PICTURE to userprofile
 module.exports.savePic = (req, res) => {
   const {_id} = res.locals.user;
 
@@ -92,6 +93,7 @@ module.exports.savePic = (req, res) => {
   });
 };
 
+// FOLLOW A USER
 module.exports.follow = (req, res, next) => {
   // Id of the user we want to follow
   const {id} = req.params;
@@ -109,7 +111,11 @@ module.exports.follow = (req, res, next) => {
           pic: currentUser.pictures,
           location: {
           lat: currentUser.location.lat,
-          lng: currentUser.location.lng
+          lng: currentUser.location.lng,
+          currentLocation: {
+            lat: currentUser.location.currentLocation.lat,
+            lng: currentUser.location.currentLocation.lng,
+          }
           },
           city: currentUser.city
       };
@@ -172,6 +178,8 @@ module.exports.follow = (req, res, next) => {
   .catch((err) => console.log(err));
 };
 
+
+// CHECK IN AND CHECK OUT functionalities
 module.exports.checkIn = (req, res, next) => {
  const {_id} = res.locals.user;
  // Find user
