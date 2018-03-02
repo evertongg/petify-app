@@ -13,6 +13,7 @@
     "connect-mongo": "^2.0.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "dotenv": "^5.0.1",
     "dropbox": "^3.0.4",
     "ejs": "^2.5.7",
     "es6-promise": "^4.2.4",

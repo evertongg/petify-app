@@ -199,6 +199,7 @@ $(document).ready(function(){
           title: "I'm here",
           icon: blueMarker
           });
+
   let myCurrentPos = new google.maps.Marker({
           position: currentLocation,
           map: map,
@@ -223,6 +224,7 @@ $(document).ready(function(){
         icon: blackMarker,
         url: `/profile/${follower.user_id}`
         });
+
     let currentMarker = new google.maps.Marker({
         position: currentPosition,
         map: map,
@@ -230,12 +232,14 @@ $(document).ready(function(){
         icon: redMarker,
         url: `/profile/${follower.user_id}`
         });
-    google.maps.event.addListener(marker, currentMarker, 'click', function() {
+        
+    google.maps.event.addListener(marker, 'click', function() {
+        window.location.href = this.url;
+    });
+    google.maps.event.addListener(currentMarker, 'click', function() {
         window.location.href = this.url;
     });
   });
   };
   google.maps.event.addDomListener(window, 'load', initialize(user, user.currentLocation));
 });
-
-// Chat functionalities

@@ -5,12 +5,14 @@ const fs = require('fs');
 const upload = require('../config/config.dropbox');
 const findHashtags = require('find-hashtags');
 
+// NOT DEPLOYED AT THE MOMENT
 function posts (req, res, next) {
   Post.find({})
   .then(posts => res.render('index', {posts, title: 'dropbox-upload'}))
   .catch(err => next(err));
 }
 
+// CREATE AND ADD POST to post model
 function createPost (req, res, next) {
   fs.readFile(req.file.path, (err, fileContent) => {
     upload.getUrl(req.file, fileContent)
@@ -66,7 +68,7 @@ module.exports.show = (req, res, next) => {
 });
 };
 
-
+// ADDING A NEW POST in the user profile
 module.exports.addPost = (req, res, next) => {
   const id = req.params.id;
   const hashtags = findHashtags(req.body.message)
@@ -121,6 +123,7 @@ module.exports.addPost = (req, res, next) => {
   };
 };
 
+// LIKES functionality
 module.exports.updatePost = (req, res, next) => {
   const user = res.locals.user;
   const post = req.params;
@@ -155,6 +158,8 @@ module.exports.updatePost = (req, res, next) => {
   .catch((err) => console.log(err));
 };
 
+
+// COMMENT functionality
 module.exports.updateComment = (req, res, next) => {
   const user = res.locals.user;
   const post = req.params;
