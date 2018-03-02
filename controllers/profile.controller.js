@@ -4,7 +4,7 @@ const Picture = require('../models/picture.model');
 const Attachment = require('../models/attachments.model');
 const moment = require('moment');
 
-
+//SHOW PUBLIC profile
 module.exports.show = (req, res, next) => {
   const {id} = req.params;
 
@@ -28,6 +28,7 @@ module.exports.show = (req, res, next) => {
 });
 };
 
+// NOT DEPLOYED AT THE MOMENT 
 module.exports.like = (req, res, next) => {
   console.log('doing like');
   const id = req.params.id;
