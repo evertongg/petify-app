@@ -3,6 +3,7 @@ const Post = require('../models/posts.model');
 const Picture = require('../models/picture.model');
 const moment = require('moment');
 const geolocation = require('geolocation');
+const cloudinary = require('cloudinary');
 
 // SHOW HOMEPAGE after logging in
 module.exports.show = (req, res) => {
@@ -69,28 +70,38 @@ module.exports.saveChanges = (req, res, next) => {
 // ADD PICTURE to userprofile
 module.exports.savePic = (req, res) => {
   const {_id} = res.locals.user;
+  console.log(req.file.originalname);
 
-  const pic = new Picture({
-    owner_id: req.session.passport.user,
-    pic_path: `../../uploads/${req.file.filename}`,
-    pic_name: req.file.originalname
+  cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API,
+    api_secret: process.env.CLOUD_SECRET
   });
 
-  pic.save()
-  .then((picture) => {
-    User.findById(_id)
-    .then((user) => {
-      user.pictures = picture.pic_path;
-
-      user.save()
-      .then(user => {
-        res.redirect('/user');
-      });
+  cloudinary.uploader.upload(req.file.path, function(result) {
+    const pic = new Picture({
+      owner_id: req.session.passport.user,
+      pic_path: `../../uploads/${req.file.filename}`,
+      pic_name: req.file.originalname,
+      url: result.url
     });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+
+    pic.save()
+    .then((picture) => {
+      User.findById(_id)
+      .then((user) => {
+        user.pictures = picture.url;
+        user.save()
+        .then(user => {
+          res.redirect('/user');
+        });
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  console.log(result);
+});
 };
 
 // FOLLOW A USER
