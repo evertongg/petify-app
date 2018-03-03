@@ -213,10 +213,10 @@ $(document).ready(function(){
             lat: follower.location.lat,
             lng: follower.location.lng
           };
-        let currentPosition = {
-            lat: follower.location.currentLocation.lat,
-            lng: follower.location.currentLocation.lng
-            };
+        // let currentPosition = {
+        //     lat: follower.location.currentLocation.lat,
+        //     lng: follower.location.currentLocation.lng
+        //     };
 
         let marker = new google.maps.Marker({
             position: position,
