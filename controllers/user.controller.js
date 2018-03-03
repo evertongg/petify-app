@@ -112,10 +112,10 @@ module.exports.follow = (req, res, next) => {
 
 // Find the user in the session = currentUser
   User.findById(sessionId)
-  .then((currentUser) => {
+  .then(function (currentUser) {
     // Find the user we want to follow = user
     User.findById(id)
-    .then((user) => {
+    .then(function(user) {
       const newFollower = {
           user_id: currentUser.id,
           petname: currentUser.petname,
@@ -154,7 +154,7 @@ module.exports.follow = (req, res, next) => {
       else
       {
         // If the followersarray is not empty see if user is in there
-        user.followers.forEach((follower) => {
+        user.followers.forEach(function(follower)  {
           if (currentUser.id == follower.user_id) {
             for (var i = user.followers.length-1; i>=0; i--) {
                 if (user.followers[i].user_id == currentUser.id) {
@@ -186,7 +186,7 @@ module.exports.follow = (req, res, next) => {
         }
     });
   })
-  .catch((err) => console.log(err));
+  .catch(function(err) {console.log(err)});
 };
 
 
