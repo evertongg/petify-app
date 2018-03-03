@@ -208,7 +208,7 @@ $(document).ready(function(){
           });
 
 
-      followers.forEach((follower) => {
+  followers.forEach((follower) => {
         let position = {
             lat: follower.location.lat,
             lng: follower.location.lng
@@ -226,19 +226,19 @@ $(document).ready(function(){
             url: `/profile/${follower.user_id}`
             });
 
-        let currentMarker = new google.maps.Marker({
-            position: currentPosition,
-            map: map,
-            title: follower.petname,
-            icon: redMarker,
-            url: `/profile/${follower.user_id}`
-            });
+        // let currentMarker = new google.maps.Marker({
+        //     position: currentPosition,
+        //     map: map,
+        //     title: follower.petname,
+        //     icon: redMarker,
+        //     url: `/profile/${follower.user_id}`
+        //     });
         google.maps.event.addListener(marker, 'click', function() {
             window.location.href = this.url;
         });
-        google.maps.event.addListener(currentMarker, 'click', function() {
-            window.location.href = this.url;
-        });
+        // google.maps.event.addListener(currentMarker, 'click', function() {
+        //     window.location.href = this.url;
+        // });
       });
   };
   google.maps.event.addDomListener(window, 'load', initialize(user, user.currentLocation));
