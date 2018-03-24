@@ -208,15 +208,26 @@ $(document).ready(function(){
           });
 
 
+<<<<<<< HEAD
   followers.forEach((follower) => {
+=======
+      followers.forEach((follower) => {
+>>>>>>> d01b25b2604d0702935d1d7249a5e00ba07963a6
         let position = {
             lat: follower.location.lat,
             lng: follower.location.lng
           };
+<<<<<<< HEAD
         // let currentPosition = {
         //     lat: follower.location.currentLocation.lat,
         //     lng: follower.location.currentLocation.lng
         //     };
+=======
+        let currentPosition = {
+            lat: follower.location.currentLocation.lat,
+            lng: follower.location.currentLocation.lng
+            };
+>>>>>>> d01b25b2604d0702935d1d7249a5e00ba07963a6
 
         let marker = new google.maps.Marker({
             position: position,
@@ -226,6 +237,7 @@ $(document).ready(function(){
             url: `/profile/${follower.user_id}`
             });
 
+<<<<<<< HEAD
         // let currentMarker = new google.maps.Marker({
         //     position: currentPosition,
         //     map: map,
@@ -239,6 +251,21 @@ $(document).ready(function(){
         // google.maps.event.addListener(currentMarker, 'click', function() {
         //     window.location.href = this.url;
         // });
+=======
+        let currentMarker = new google.maps.Marker({
+            position: currentPosition,
+            map: map,
+            title: follower.petname,
+            icon: redMarker,
+            url: `/profile/${follower.user_id}`
+            });
+        google.maps.event.addListener(marker, 'click', function() {
+            window.location.href = this.url;
+        });
+        google.maps.event.addListener(currentMarker, 'click', function() {
+            window.location.href = this.url;
+        });
+>>>>>>> d01b25b2604d0702935d1d7249a5e00ba07963a6
       });
   };
   google.maps.event.addDomListener(window, 'load', initialize(user, user.currentLocation));

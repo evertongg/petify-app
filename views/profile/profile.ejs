@@ -56,7 +56,11 @@
                   <%  } else { %>
                       "About me..."
                   <%  } %> </p>
+<<<<<<< HEAD
                   <p class="location"><strong>Location : </strong> <%= user.city %> </p>
+=======
+                  <p class="l-height"><strong>Location : </strong> <%= user.city %> </p>
+>>>>>>> d01b25b2604d0702935d1d7249a5e00ba07963a6
                   <p class="l-height"><strong>I'm a: </strong> <%= user.animaltype %> </p>
                   <p class="l-height"><strong>Species: </strong> <%= user.breed %> </p>
                   <p class="l-height"><strong>Birthdate: </strong> <%= user.birthdate %> </p>
@@ -181,14 +185,22 @@
           <form class="follow-form" action="/user/follow/<%= user.id %>" method="post">
             <button type="submit" name="button" class="btn btn-primary follow-btn">Follow me</button>
           </form>
+<<<<<<< HEAD
           <p class="mx-auto mt-2"><%= user.followers.length %> Followers</p>
+=======
+          <p class="mx-auto mt-2"><%= user.followersNumber %> Followers</p>
+>>>>>>> d01b25b2604d0702935d1d7249a5e00ba07963a6
 
         </div>
       </div>
       <div class="border rounded p-1 bg-white mh-100 h-100">
         <div class="border-bottom">
           <h5 class="display-6 mt-2 text-center">Find <%= user.petname %>'s friends</h5>
+<<<<<<< HEAD
           <p class='text-center small'><%= user.petname %> is following <%= user.following.length %> pets</p>
+=======
+          <p class='text-center small'><%= user.petname %> is following <%= user.followingNumber %> pets</p>
+>>>>>>> d01b25b2604d0702935d1d7249a5e00ba07963a6
         </div>
 
 
