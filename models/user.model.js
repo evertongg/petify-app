@@ -44,38 +44,8 @@ const userSchema = new mongoose.Schema({
   character: [String],
   bio: String,
   skills: [String],
-  followers: [{
-    user_id: String,
-    petname: String,
-    pic: String,
-    city: String,
-    location: {
-       lat: Number,
-       lng: Number,
-       currentLocation: {
-         lat: Number,
-         lng: Number,
-       }
-    }
-    }],
-  followersNumber: {
-      type: Number,
-      default: 0
-    },
-  following: [{
-    user_id: String,
-    petname: String,
-    pic: String,
-    city: String,
-    location: {
-       lat: Number,
-       lng: Number,
-    }
-    }],
-  followingNumber: {
-    type: Number,
-    default: 0
-  },
+  followers: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  following: [{type: Schema.Types.ObjectId, ref: 'User'}],
   posts: [String],
   paws: Number,
   paw_ids: [String]

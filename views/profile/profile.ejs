@@ -181,14 +181,14 @@
           <form class="follow-form" action="/user/follow/<%= user.id %>" method="post">
             <button type="submit" name="button" class="btn btn-primary follow-btn">Follow me</button>
           </form>
-          <p class="mx-auto mt-2"><%= user.followersNumber %> Followers</p>
+          <p class="mx-auto mt-2"><%= user.followers.length %> Followers</p>
 
         </div>
       </div>
       <div class="border rounded p-1 bg-white mh-100 h-100">
         <div class="border-bottom">
           <h5 class="display-6 mt-2 text-center">Find <%= user.petname %>'s friends</h5>
-          <p class='text-center small'><%= user.petname %> is following <%= user.followingNumber %> pets</p>
+          <p class='text-center small'><%= user.petname %> is following <%= user.following.length %> pets</p>
         </div>
 
 
